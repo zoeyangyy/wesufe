@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,,user-scalable=no">
+    <title>library</title>
+    <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.0.2/weui.min.css" />
+</head>
+
+<body>
+    <volist name="books" id="book">
+        <a href="bookitem?url={$book.url}">
+            <div class="weui-media-box weui-media-box_text">
+                <h4 class="weui-media-box__title">书名：{$book.bookname} </h4>
+                <p class="weui-media-box__desc">出版社：{$book.publisher}</p>
+                <p class="weui-media-box__desc">作者：{$book.author}</p>
+                <p class="weui-media-box__desc">图书类型{$book.booktype}</p>
+                <p class="weui-media-box__desc">书号{$book.booknumber}</p>
+            </div>
+        </a>
+    </volist>
+</body>
+
+</html>

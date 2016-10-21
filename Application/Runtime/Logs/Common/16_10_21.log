@@ -1,0 +1,29 @@
+[ 2016-10-21T02:45:40+08:00 ] 195.62.53.168 /a
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000099s ]
+ERR: 无法加载模块:A
+
+[ 2016-10-21T05:48:30+08:00 ] 80.82.78.38 /cache/global/img/gs.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000126s ]
+
+[ 2016-10-21T07:36:11+08:00 ] 218.4.158.118 /WEB_VMS/LEVEL15/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000067s ]
+ERR: 无法加载模块:WEB_VMS
+
+[ 2016-10-21T07:37:46+08:00 ] 71.6.158.166 /robots.txt
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000087s ]
+ERR: 无法加载模块:Robots
+
+[ 2016-10-21T07:37:47+08:00 ] 71.6.158.166 /sitemap.xml
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000064s ]
+ERR: 无法加载模块:Sitemap
+
