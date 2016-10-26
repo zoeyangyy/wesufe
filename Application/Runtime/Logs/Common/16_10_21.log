@@ -27,3 +27,34 @@ INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
 INFO: [ app_init ] --END-- [ RunTime:0.000064s ]
 ERR: 无法加载模块:Sitemap
 
+[ 2016-10-21T13:08:39+08:00 ] 101.94.204.167 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000064s ]
+
+[ 2016-10-21T13:12:40+08:00 ] 163.172.134.70 /cache/global/img/gs.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000076s ]
+
+[ 2016-10-21T16:18:29+08:00 ] 101.94.204.167 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000057s ]
+
+[ 2016-10-21T16:33:55+08:00 ] 120.27.118.20 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000168s ]
+
+[ 2016-10-21T16:36:08+08:00 ] 120.27.118.20 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000067s ]
+
+[ 2016-10-21T23:39:41+08:00 ] 113.195.188.14 /manager/html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000104s ]
+ERR: 无法加载模块:Manager
+

@@ -14,9 +14,9 @@ class WeixinController extends Controller {
 					'name' => '学习帮手',
 					'sub_button' => array(
 						0 => array(
-							'type' => 'view',
+							'type' => 'click',
 							'name' => '个人课表',
-							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/learn/course'),
+							'key'=>'MENU_KEY_course',
 						),
 						1 => array(
 							'type' => 'view',
@@ -24,9 +24,9 @@ class WeixinController extends Controller {
 							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/learn/library'),
 						),
 						2 => array(
-							'type' => 'view',
+							'type' => 'click',
 							'name' => '成绩查询',
-							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/learn/score'),
+							'key' => 'MENU_KEY_score',
 						),
 					),
 				),
@@ -70,9 +70,6 @@ class WeixinController extends Controller {
 	$openid = $weObj->getRev()->getRevFrom();
 	$data['openid'] = $openid;
 
-	\Think\Log::record($openid);
-	session('openid',$openid);
-
 	$menu = $weObj->getMenu(); //获取菜单操作
 		$user_menu = array(
 			'button' => array(
@@ -80,9 +77,9 @@ class WeixinController extends Controller {
 					'name' => '学习帮手',
 					'sub_button' => array(
 						0 => array(
-							'type' => 'view',
+							'type' => 'click',
 							'name' => '个人课表',
-							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/learn/course'),
+							'key'=>'MENU_KEY_course',
 						),
 						1 => array(
 							'type' => 'view',
@@ -90,9 +87,9 @@ class WeixinController extends Controller {
 							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/learn/library'),
 						),
 						2 => array(
-							'type' => 'view',
+							'type' => 'click',
 							'name' => '成绩查询',
-							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/learn/score'),
+							'key' => 'MENU_KEY_score',
 						),
 					),
 				),
@@ -163,8 +160,37 @@ class WeixinController extends Controller {
 				$User->where(array('openid'=>$openid))->save();
 				break;
 			case \Wechat::EVENT_MENU_CLICK:
-				if ($event['key']=='c') {
-					$weObj->text("")->reply();
+				if ($event['key']=='MENU_KEY_course') {
+					$accessToken_time = $User->where(array('openid'=>$openid))->getField('accessToken_time');
+					if((time()-$accessToken_time)/86400>80)
+						$weObj->text("您的授权已过期，请点击 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>再次绑定</a>")->reply();
+					else{
+					$info = array(
+						   	"0" =>array(
+						   		'Title'=>'个人课表',
+						   		'Description'=>'summary text',
+						   		'PicUrl'=>'http://img.25pp.com/uploadfile/soft/images/2014/0925/20140925021815283.jpg',
+						   		'Url'=> C('WEB_ROOT').'/home/learn/course?openid='.$openid,
+						   	),
+						);
+					$weObj->news($info)->reply();
+				}
+				}
+				if ($event['key']=='MENU_KEY_score') {
+					$accessToken_time = $User->where(array('openid'=>$openid))->getField('accessToken_time');
+					if((time()-$accessToken_time)/86400>80)
+						$weObj->text("您的授权已过期，请点击 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>再次绑定</a>")->reply();
+					else{
+					$info = array(
+						   	"0" =>array(
+						   		'Title'=>'成绩查询',
+						   		'Description'=>'summary text',
+						   		'PicUrl'=>'http://atth.jzb.com/forum/201502/12/175042imee0ks08ezcgs1z.png',
+						   		'Url'=> C('WEB_ROOT').'/home/learn/score?openid='.$openid,
+						   	),
+						);
+					$weObj->news($info)->reply();
+				}
 				}
 				break;
 			default:
@@ -176,4 +202,5 @@ class WeixinController extends Controller {
 			$weObj->text("thanks")->reply();
 		}
 	}
+
 }

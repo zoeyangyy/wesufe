@@ -6,8 +6,18 @@ class LearnController extends Controller {
 
 	public function course() {
 
-		dump(session('openid'));
+		$User = M('User');
+		$openid=$_GET['openid'];
+		$condition['openid'] = $openid;
+
+		$stuNo=$User->where($condition)->getField('stuNo');
+		$accessToken=$User->where($condition)->getField('accessToken');
+		$json = file_get_contents("http://weixin.sufe.edu.cn/api/std/timetable?oauth_consumer_key=4f6p8203&clientip=CLIENTIP&oauth_version=2.a&scope=all&access_token=".$accessToken."&openid=".$stuNo);
+		$obj = json_decode($json,true);
+		dump($obj);
+        
 		$this->display();
+		
 	}
 	public function library() {
 		$command1 = escapeshellcmd('python '.dirname(__FILE__).'/search.py --keyword=java --page=1');
@@ -30,6 +40,17 @@ class LearnController extends Controller {
 	}
 
 	public function score() {
+		$User = M('User');
+		$openid=$_GET['openid'];
+		$condition['openid'] = $openid;
+		
+		$stuNo=$User->where($condition)->getField('stuNo');
+		$accessToken=$User->where($condition)->getField('accessToken');
+		$json = file_get_contents("http://weixin.sufe.edu.cn/api/std/gpasummary?oauth_consumer_key=4f6p8203&clientip=CLIENTIP&oauth_version=2.a&scope=all&access_token=".$accessToken."&openid=".$stuNo);
+		$obj = json_decode($json,true);
+		dump($obj);
+        
+		$this->display();
 
 	}
 }
