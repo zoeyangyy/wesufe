@@ -23,7 +23,8 @@ def search(keyword,page):
 		dict1['publisher']=row.find_all('td')[3].text
 		dict1['booknumber']=row.find_all('td')[4].text
 		dict1['booktype']=row.find_all('td')[5].text
-		dict1['url']=row.find_all('td')[1].a['href'][-10:]	
+		dict1['url']=row.find_all('td')[1].a['href'][-10:]
+
 		list1.append(dict1)
 	
 	j=json.dumps(list1)

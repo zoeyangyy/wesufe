@@ -31,3 +31,57 @@ INFO: [ app_init ] --START--
 INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
 INFO: [ app_init ] --END-- [ RunTime:0.000078s ]
 
+[ 2016-10-26T15:40:32+08:00 ] 104.223.133.49 /phpmyadmin
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000063s ]
+ERR: 无法加载模块:Phpmyadmin
+
+[ 2016-10-26T17:46:04+08:00 ] 163.177.152.5 /Portal/Portal.mwsl
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000059s ]
+ERR: 无法加载模块:Portal
+
+[ 2016-10-26T17:46:04+08:00 ] 163.177.152.5 /ibm/console/logon.jsp?action=OK
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000044s ]
+ERR: 无法加载模块:Ibm
+
+[ 2016-10-26T17:46:04+08:00 ] 163.177.152.5 /CSS/Miniweb.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000054s ]
+ERR: 无法加载模块:CSS
+
+[ 2016-10-26T17:46:04+08:00 ] 163.177.152.5 /docs/cplugError.html/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000124s ]
+ERR: 无法加载模块:Docs
+
+[ 2016-10-26T17:46:04+08:00 ] 163.177.152.5 /console/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000044s ]
+ERR: 无法加载模块:Console
+
+[ 2016-10-26T17:46:05+08:00 ] 163.177.152.5 /console/portal/0/Welcome
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000064s ]
+ERR: 无法加载模块:Console
+
+[ 2016-10-26T18:16:12+08:00 ] 222.186.50.233 /phpMyAdmin
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000076s ]
+ERR: 无法加载模块:PhpMyAdmin
+
+[ 2016-10-26T23:35:31+08:00 ] 116.55.227.87 /phpmyadmin
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000071s ]
+ERR: 无法加载模块:Phpmyadmin
+

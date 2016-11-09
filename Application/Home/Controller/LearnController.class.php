@@ -14,18 +14,23 @@ class LearnController extends Controller {
 		$accessToken=$User->where($condition)->getField('accessToken');
 		$json = file_get_contents("http://weixin.sufe.edu.cn/api/std/timetable?oauth_consumer_key=4f6p8203&clientip=CLIENTIP&oauth_version=2.a&scope=all&access_token=".$accessToken."&openid=".$stuNo);
 		$obj = json_decode($json,true);
-		dump($obj);
-        
+        $this->assign('timetable',$obj["timetable"]);
+        $this->assign('title','课程表');
 		$this->display();
 		
 	}
 	public function library() {
-		$command1 = escapeshellcmd('python '.dirname(__FILE__).'/search.py --keyword=java --page=1');
-		$output1 = shell_exec($command1);
-		header("Content-type: text/html; charset=utf-8");
-		$result = json_decode($output1, true);
-		$this->assign('books',$result);
+		$book=$_POST['book'];
+		$this->assign('keyword',$book);
 		$this->display();		
+	}
+	public function ajaxGetbook(){
+		$book=urlencode($_GET['book']);
+	    $page=$_GET['page'];	
+		$command1 = escapeshellcmd('python '.dirname(__FILE__).'/search.py --keyword='.$book.' --page='.$page);
+		$output1 = shell_exec($command1);
+		$result = json_decode($output1, true);
+		$this->ajaxReturn($result);
 	}
 
 	public function bookitem(){

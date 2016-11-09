@@ -1,23 +1,129 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,,user-scalable=no">
-    <title>library</title>
-    <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.0.2/weui.min.css" />
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo ($title); ?></title>
+    <link rel="stylesheet" type="text/css" href="/Public/css/vendor.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/css/main.css" />
+    
 </head>
 
 <body>
-    <?php if(is_array($books)): $i = 0; $__LIST__ = $books;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$book): $mod = ($i % 2 );++$i;?><a href="bookitem?url=<?php echo ($book["url"]); ?>">
-            <div class="weui-media-box weui-media-box_text">
-                <h4 class="weui-media-box__title">书名：<?php echo ($book["bookname"]); ?> </h4>
-                <p class="weui-media-box__desc">出版社：<?php echo ($book["publisher"]); ?></p>
-                <p class="weui-media-box__desc">作者：<?php echo ($book["author"]); ?></p>
-                <p class="weui-media-box__desc">图书类型<?php echo ($book["booktype"]); ?></p>
-                <p class="weui-media-box__desc">书号<?php echo ($book["booknumber"]); ?></p>
+    
+<div class="weui-search-bar" id="searchBar">
+        <form class="weui-search-bar__form" action="/home/learn/library" method="post">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="" name="book" data-keyword="<?php echo ($keyword); ?>">
+                <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
             </div>
-        </a><?php endforeach; endif; else: echo "" ;endif; ?>
+            <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+                <i class="weui-icon-search"></i>
+                <span>搜索</span>
+            </label>
+        </form>
+        <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+    </div>
+
+    <div class="panel">
+    	<div><?php echo ($command); ?></div>
+        <div class="panel-bd">
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/Public/js/vendor.js"></script>
+    
+<script type="text/javascript">
+  $(document).ready(function(){
+        var range = 50;             //距下边界长度/单位px  
+        var num = 1;  
+        var totalheight = 0;
+        num=getbook(num);                
+        $(window).scroll(function(){  
+            var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)   
+            totalheight = parseFloat($(window).height()) + parseFloat(srollPos);  
+            if(($(document).height()-range) <= totalheight) {           	
+            	num=getbook(num); 
+            }  
+        });  
+    });  
+
+  	function getbook(num){
+  		var book = $('#searchInput').data('keyword');
+            	$.get('/home/learn/ajaxGetbook',{book:book,page:num},
+		            function(data){
+		                var arr=[];
+		                $.each(data,function(i,e){
+		                	arr.push('<a class="panel-bd-box" href="bookitem?url='+e.url+'">'+
+						                '<div class="box-content">'+
+						                    '<p class="bookname">'+e.bookname+'</p>'+
+						                    '<p class="author">'+e.author+' &nbsp;&nbsp;&nbsp;'+e.publisher+'</p>'+
+						                    '<p class="pulisher"></p>'+
+						                    '<p class="number">'+e.booknumber+'</p>'+
+						                    '<p class="type"></p>'+
+						                '</div>'+
+						                '<div class="box-icon"><i class="iconfont">&#xe669;</i></div>'+
+							        '</a>')
+		                });
+		                var html = arr.join('');
+		                $('.panel-bd').append(html);
+		            }
+		        );
+		return ++num;
+  	}
+</script>
+<script type="text/javascript" class="searchbar js_show">
+    $(function(){
+        var $searchBar = $('#searchBar'),
+            $searchResult = $('#searchResult'),
+            $searchText = $('#searchText'),
+            $searchInput = $('#searchInput'),
+            $searchClear = $('#searchClear'),
+            $searchCancel = $('#searchCancel');
+
+        function hideSearchResult(){
+            $searchResult.hide();
+            $searchInput.val('');
+        }
+        function cancelSearch(){
+            hideSearchResult();
+            $searchBar.removeClass('weui-search-bar_focusing');
+            $searchText.show();
+        }
+
+        $searchText.on('click', function(){
+            $searchBar.addClass('weui-search-bar_focusing');
+            $searchInput.focus();
+        });
+        $searchInput
+            .on('blur', function () {
+                if(!this.value.length) cancelSearch();
+            })
+            .on('input', function(){
+                if(this.value.length) {
+                    $searchResult.show();
+                } else {
+                    $searchResult.hide();
+                }
+            })
+        ;
+        $searchClear.on('click', function(){
+            hideSearchResult();
+            $searchInput.focus();
+        });
+        $searchCancel.on('click', function(){
+            cancelSearch();
+            $searchInput.blur();
+        });
+    });
+
+
+</script>
+
+ 
 </body>
 
 </html>

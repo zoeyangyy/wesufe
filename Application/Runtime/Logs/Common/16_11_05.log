@@ -1,0 +1,64 @@
+[ 2016-11-05T00:46:06+08:00 ] 172.82.166.210 /cache/global/img/gs.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000059s ]
+
+[ 2016-11-05T03:43:39+08:00 ] 118.178.228.150 /phpmyadmin
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000076s ]
+ERR: 无法加载模块:Phpmyadmin
+
+[ 2016-11-05T05:50:42+08:00 ] 80.82.78.38 /cache/global/img/gs.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000063s ]
+
+[ 2016-11-05T11:28:23+08:00 ] 71.6.146.185 /robots.txt
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000069s ]
+ERR: 无法加载模块:Robots
+
+[ 2016-11-05T11:28:23+08:00 ] 198.20.99.130 /robots.txt
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000055s ]
+ERR: 无法加载模块:Robots
+
+[ 2016-11-05T11:28:24+08:00 ] 198.20.99.130 /sitemap.xml
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000079s ]
+ERR: 无法加载模块:Sitemap
+
+[ 2016-11-05T15:17:24+08:00 ] 101.200.78.64 /admin
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000091s ]
+ERR: 无法加载模块:Admin
+
+[ 2016-11-05T17:33:10+08:00 ] 61.49.45.45 /Http/DataLayCfg.xml
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000085s ]
+ERR: 无法加载模块:Http
+
+[ 2016-11-05T17:33:11+08:00 ] 61.49.45.45 /www/start.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000084s ]
+ERR: 无法加载模块:Www
+
+[ 2016-11-05T17:33:11+08:00 ] 61.49.45.45 /RemoteControl.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000058s ]
+ERR: 无法加载模块:RemoteControl
+
+[ 2016-11-05T17:33:43+08:00 ] 61.49.45.45 /jenkins
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000057s ]
+ERR: 无法加载模块:Jenkins
+
