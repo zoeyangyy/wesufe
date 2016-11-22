@@ -1,25 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<extend name="Public:layout" />
+<block name="content">
+    <div class="libraryitem">
+        <div class="toppanel"></div>
+        <div class="bookname">{$bookname}</div>
+        <div class="author">{$author}</div>
+        <div class="image">
+            <img src={$bookinfo.image}>
+        </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,,user-scalable=no">
-    <title>bookitem</title>
-    <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.0.2/weui.min.css" />
-</head>
-
-<body>
-    <div class="weui-media-box weui-media-box_text">
-    	<img src={$bookinfo.image} alt="图片不存在">
-        <h4 class="weui-media-box__title">剩余数目：{$bookinfo.available_number}</h4>
-        <p class="weui-media-box__desc">ISBN：{$bookinfo.ISBN}</p>
-        <p class="weui-media-box__desc">总结：{$bookinfo.summary}</p>       
-        <volist name="storeinfo" id="sinfo">
-            <p class="weui-media-box__desc">
-                状态：{$sinfo.status} 书号：{$sinfo.booknumber} 条形码：{$sinfo.barcode} 位置：{$sinfo.place} 年份：{$sinfo.year}
-            </p>
-        </volist>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__hd">豆瓣简介</div>
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_text">
+                    <p class="weui-media-box__desc">{$bookinfo.summary}</p>
+                </div>
+            </div>
+        </div>
+        <div class="weui-panel">
+            <div class="weui-panel__hd">馆藏状态</div>
+            <div class="weui-panel__bd">
+            <volist name="storeinfo" id="sinfo">
+                <div class="weui-media-box weui-media-box_text">
+                    <p class="weui-media-box__desc">{$sinfo.place}<br/>
+                    书号：{$sinfo.booknumber}</p>
+                    <ul class="weui-media-box__info">
+                        <li class="weui-media-box__info__meta">条形码：{$sinfo.barcode}</li>
+                        <li class="weui-media-box__info__meta">{$sinfo.year}</li>
+                        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">{$sinfo.status}</li>
+                    </ul>
+                </div>
+            </volist>
+            </div>
+        </div>
     </div>
-</body>
-
-</html>
+</block>
+<block name="script">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if($('img').attr("src")=="../tpl/images/nobook.jpg")
+                $('img').attr("src","/Public/img/book.jpg");
+            $('.toppanel').css("background","url("+$('img').attr("src")+")");
+            $('.toppanel').css("background-size","cover");
+            $('.toppanel').css("opacity","0.7");
+        });
+    </script>
+</block>

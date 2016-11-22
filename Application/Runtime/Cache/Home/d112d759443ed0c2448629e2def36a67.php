@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,maximum-scale=1,initial-scale=1,user-scalable=no">
     <title><?php echo ($title); ?></title>
     <link rel="stylesheet" type="text/css" href="/Public/css/vendor.css" />
     <link rel="stylesheet" type="text/css" href="/Public/css/main.css" />
@@ -72,6 +72,7 @@
     </div>
 
     <script type="text/javascript" src="/Public/js/vendor.js"></script>
+    <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>
     
 
     <script type="text/javascript">

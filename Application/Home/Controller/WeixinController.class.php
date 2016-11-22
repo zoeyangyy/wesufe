@@ -21,7 +21,7 @@ class WeixinController extends Controller {
 						1 => array(
 							'type' => 'view',
 							'name' => '图书查询',
-							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/learn/library'),
+							'url' => C('WEB_ROOT').'/home/learn/librarysearch',
 						),
 						2 => array(
 							'type' => 'click',
@@ -43,14 +43,9 @@ class WeixinController extends Controller {
 					
 				),
 				2 => array(
-					'name' => '互动社区',
-					'sub_button' => array(
-						0 => array(
-							'type' => 'view',
-							'name' => 'bbb',
-							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/'),
-						),					
-					),
+					'name' => '表白墙',
+					'type' => 'view',
+					'url' => C('WEB_ROOT').'/home/lovewall/lovewallPanel?openid='.$openid,
 				),
 			),
 		);
@@ -69,6 +64,17 @@ class WeixinController extends Controller {
 	$weObj->valid();
 	$openid = $weObj->getRev()->getRevFrom();
 	$data['openid'] = $openid;
+	// //获取微信用户信息
+	// $condition['openid'] = $openid;
+	// $auth_info = $weObj->getOauthAccessToken();
+	// if($auth_info){
+	// 	$openid = $auth_info["openid"];
+	// 	$access_token = $auth_info["access_token"];
+	// 	$user_info = $weObj->getOauthUserinfo($access_token, $openid);
+	// 	$data['sex']=$user_info["sex"];
+	// 	$data['nickname']=$user_info["nickname"];
+	// }
+	// $User->where($condition)->save($data);
 
 	$menu = $weObj->getMenu(); //获取菜单操作
 		$user_menu = array(
@@ -84,7 +90,7 @@ class WeixinController extends Controller {
 						1 => array(
 							'type' => 'view',
 							'name' => '图书查询',
-							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/learn/library'),
+							'url' => C('WEB_ROOT').'/home/learn/librarysearch',
 						),
 						2 => array(
 							'type' => 'click',
@@ -106,14 +112,9 @@ class WeixinController extends Controller {
 					
 				),
 				2 => array(
-					'name' => '互动社区',
-					'sub_button' => array(
-						0 => array(
-							'type' => 'view',
-							'name' => 'bbb',
-							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/'),
-						),					
-					),
+					'name' => '表白墙',
+					'type' => 'view',
+					'url' => C('WEB_ROOT').'/home/lovewall/lovewallPanel?openid='.$openid,
 				),
 			),
 		);
@@ -161,20 +162,24 @@ class WeixinController extends Controller {
 				break;
 			case \Wechat::EVENT_MENU_CLICK:
 				if ($event['key']=='MENU_KEY_course') {
-					$accessToken_time = $User->where(array('openid'=>$openid))->getField('accessToken_time');
-					if((time()-$accessToken_time)/86400>80)
-						$weObj->text("您的授权已过期，请点击 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>再次绑定</a>")->reply();
+					if($User->where(array('openid'=>$openid))->getField('accessToken')==null)
+						$weObj->text("您尚未绑定wesufe，请 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>立即绑定</a>")->reply();
 					else{
-					$info = array(
-						   	"0" =>array(
-						   		'Title'=>'个人课表',
-						   		'Description'=>'summary text',
-						   		'PicUrl'=>'http://img.25pp.com/uploadfile/soft/images/2014/0925/20140925021815283.jpg',
-						   		'Url'=> C('WEB_ROOT').'/home/learn/course?openid='.$openid,
-						   	),
-						);
-					$weObj->news($info)->reply();
-				}
+						$accessToken_time = $User->where(array('openid'=>$openid))->getField('accessToken_time');
+						if((time()-$accessToken_time)/86400>80)
+							$weObj->text("您的授权已过期，请点击 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>再次绑定</a>")->reply();
+						else{
+						$info = array(
+							   	"0" =>array(
+							   		'Title'=>'个人课表',
+							   		'Description'=>'summary text',
+							   		'PicUrl'=>'http://img.25pp.com/uploadfile/soft/images/2014/0925/20140925021815283.jpg',
+							   		'Url'=> C('WEB_ROOT').'/home/learn/course?openid='.$openid,
+							   	),
+							);
+						$weObj->news($info)->reply();
+						}
+					}
 				}
 				if ($event['key']=='MENU_KEY_score') {
 					$accessToken_time = $User->where(array('openid'=>$openid))->getField('accessToken_time');
@@ -190,7 +195,7 @@ class WeixinController extends Controller {
 						   	),
 						);
 					$weObj->news($info)->reply();
-				}
+					}
 				}
 				break;
 			default:

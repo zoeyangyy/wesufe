@@ -19,9 +19,16 @@ class LearnController extends Controller {
 		$this->display();
 		
 	}
+
+	public function librarysearch(){
+		$this->assign('title','图书查询');
+		$this->display();
+	}
+
 	public function library() {
 		$book=$_POST['book'];
 		$this->assign('keyword',$book);
+		$this->assign('title',$book);
 		$this->display();		
 	}
 	public function ajaxGetbook(){
@@ -39,6 +46,8 @@ class LearnController extends Controller {
 		header("Content-type: text/html; charset=utf-8");
 		$result=json_decode($output2,true);
 		$storeinfo=$result['storeinfor'];
+		$this->assign('bookname',$_GET["bookname"]);
+		$this->assign('author',$_GET["author"]);
 		$this->assign('bookinfo',$result);
 		$this->assign('storeinfo',$storeinfo);
 		$this->display();
