@@ -12,6 +12,7 @@
 
 <body>
     
+<div class="course">
     <div class="swiper-container swiper-container-horizontal">
         <div class="swiper-background"></div>
         <div class="swiper-frame"></div>
@@ -51,18 +52,18 @@
             <?php if(is_array($timetable)): $i = 0; $__LIST__ = $timetable;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="panel-bd-box">
                 	<div class="hidden" style="display:none;"><?php echo ($vo[weekday]); ?></div>
                     <div class="panel-bd-box-time">
-                        <p class="start-time"><?php echo ($vo[lessons][0][time]); ?></p>
-                        <p class="end-time"><?php echo ($vo[lessons][0][time]); ?></p>
+                        <p class="start-time"><?php echo ($vo[time]); ?></p>
+                        <p class="end-time"><?php echo ($vo[time]); ?></p>
                     </div>
-                    <div class="panel-bd-box-icon"><i class="iconfont">&#x3442;</i></div>
+                    <div class="panel-bd-box-icon"><i class="iconfont"><?php echo ($vo[icon]); ?></i></div>
                     <div class="panel-bd-box-course">
-                        <h4 class="course-title"><?php echo ($vo[lessons][0][lessonName]); ?></h4>
-                        <p><?php echo ($vo[lessons][0][teacher]); ?> &nbsp;&nbsp;&nbsp; <?php echo ($vo[lessons][0][duration]); ?></p>
+                        <h4 class="course-title"><?php echo ($vo[lessonName]); ?></h4>
+                        <p><?php echo ($vo[teacher]); ?> &nbsp;&nbsp;&nbsp; <?php echo ($vo[duration]); ?></p>
                     </div>
                     <div class="panel-bd-box-place">
-                    	<div class="hidden2" style="display:none;"><?php echo ($vo[lessons][0][isMajor]); ?></div>
+                    	<div class="hidden2" style="display:none;"><?php echo ($vo[isMajor]); ?></div>
                         <div class="ismajor">专业课</div>
-                        <p><?php echo ($vo[lessons][0][place]); ?></p>
+                        <p><?php echo ($vo[place]); ?></p>
                     </div>
                 </div><?php endforeach; endif; else: echo "" ;endif; ?>
         </div>
@@ -70,6 +71,7 @@
             今天没有课啦！
         </div>
     </div>
+  </div>  
 
     <script type="text/javascript" src="/Public/js/vendor.js"></script>
     <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>

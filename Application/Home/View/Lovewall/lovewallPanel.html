@@ -1,163 +1,101 @@
 <extend name="Public:layout" />
 <block name="content">
-    <div class="lovewallPanel">
-        <div class="toppanel" style="background:url('/Public/img/banner.jpg')">
-            <a class="toppanel-box toppanel-box-on" id="sortTime" href="javascript:void(0)">最新&nbsp; ↑↓</a>
+    <div class="lovewallPaneltry">
+        <div class="iphone">
+        <div class="iphone__upper">
+            <a class="toppanel-box toppanel-box-on" id="sortTime" href="javascript:void(0)">默认排序</a>
             <a class="toppanel-box" id="sortLike" href="javascript:void(0)">热度最高</a>
         </div>
-        <div id="wrapper">
-            <div id="scroller">
-                <div id="pullDown" class="">
-                    <div class="pullDownLabel"></div>
-                </div>
-                <div class="pulldown-tips">下拉刷新</div>
-                <div class="mainview">
-                    <div class="mainview-box">
-                        <div class="mainview-box-dialog">
-                            <div class="dialog-toppanel">
-                                <svg class="icon" aria-hidden="true">
-                                    <use xlink:href="#icon-09"></use>
-                                </svg>
-                                <div class="fromwho">某某</div>
-                                <div class="towhom">To 某某</div>
-                                <div class="time">2016/11/13 18:27</div>
-                            </div>
-                            <div class="text">满地都是六便士,他却抬头看见了月亮。</div>
-                            <div class="dialog-bottompanel">
-                                <div class="dialog-bottompanel-like">
-                                    <svg class="iconlike" aria-hidden="true">
-                                        <use xlink:href="#icon-like"></use>
-                                    </svg>
-                                    <span class="count">0</span>
-                                </div>
-                                <div class="dialog-bottompanel-comment">
-                                    <svg class="iconcomment" aria-hidden="true">
-                                        <use xlink:href="#icon-pinglun1"></use>
-                                    </svg>
-                                    <span class="count">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mainview-box">
-                        <div class="mainview-box-dialog">
-                            <div class="dialog-toppanel">
-                                <svg class="icon" aria-hidden="true">
-                                    <use xlink:href="#icon-09"></use>
-                                </svg>
-                                <div class="fromwho">某某</div>
-                                <div class="towhom">To 某某</div>
-                                <div class="time">2016/11/13 18:27</div>
-                            </div>
-                            <div class="text">The first two Sass color functions we will use are lighten and darken. As you might imagine.</div>
-                            <div class="dialog-bottompanel">
-                                <div class="dialog-bottompanel-like">
-                                    <svg class="iconlike" aria-hidden="true">
-                                        <use xlink:href="#icon-like"></use>
-                                    </svg>
-                                    <span class="count">0</span>
-                                </div>
-                                <div class="dialog-bottompanel-comment">
-                                    <svg class="iconcomment" aria-hidden="true">
-                                        <use xlink:href="#icon-pinglun1"></use>
-                                    </svg>
-                                    <span class="count">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mainview-box mainview-box-reverse">
-                        <div class="mainview-box-dialog">
-                            <div class="dialog-toppanel">
-                                <svg class="icon" aria-hidden="true">
-                                    <use xlink:href="#icon-12"></use>
-                                </svg>
-                                <div class="fromwho">费渡</div>
-                                <div class="towhom">To 于连</div>
-                                <div class="time">2016/11/13 18:27</div>
-                            </div>
-                            <div class="text">贝尚松是法国一座古城，城墙高大。初到神学院，那门上的铁十字架，修士的黑色道袍，和他们麻木不仁的面孔都使于连感到恐怖。他对于连说：“嘻笑就是虚伪的舞台”。</div>
-                            <div class="dialog-bottompanel">
-                                <div class="dialog-bottompanel-like">
-                                    <svg class="iconlike" aria-hidden="true">
-                                        <use xlink:href="#icon-like"></use>
-                                    </svg>
-                                    <span class="count">0</span>
-                                </div>
-                                <div class="dialog-bottompanel-comment">
-                                    <svg class="iconcomment" aria-hidden="true">
-                                        <use xlink:href="#icon-pinglun1"></use>
-                                    </svg>
-                                    <span class="count">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="list__wrapper">
+            <!-- SVG -->
+            <div class="svg__wrapper">
+                <svg width="100%" height="180" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <defs>
+                        <filter id="goo">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+                            <feBlend in="SourceGraphic" in2="goo" />
+                        </filter>
+                        <filter id="fgoo">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+                        </filter>
+                    </defs>
+                    <g id="gooey-group">
+                        <path id="curve" d="M0 90 Q 161 90 322 90" fill="white"></path>
+                    </g>
+                    <g id="circle_group">
+                        <circle id="circle" cx="160" cy="190" r="20" fill="rgba(255,255,255,0)"></circle>
+                    </g>
+                    <!-- <path id="bottom-line" d="M0,120 L320,120 L320,90 L0,90" fill="white" stroke="white"></path> -->
+                </svg>
+                <svg width="90" height="90" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <path id="progress" d="M45,100a55,55 0 1,0 110,0a55,55 0 1,0 -110,0" fill="transparent" stroke="white" stroke-width="8"></path>
+                </svg>
             </div>
-            <div id="pullUp" class="">
-                <div class="pullUpLabel">加载更多</div>
+            <div class="mainview">
+                
+            </div>
+            <div class="loadmore">正在加载中…</div>
+        </div>
+    </div>
+    <div class="bottompanel">
+        <div class="bar"></div>
+        <svg class="iconpost" aria-hidden="true">
+            <use xlink:href="#icon-aixin"></use>
+        </svg>
+    </div>
+    <div class="mask"></div>
+    <form class="bomb-box" action="/home/lovewall/post" method="post">
+        <div class="box-gender">
+            <input name="gender" style="display:none;" id="hidden" value="0">
+            <div class="male">
+                <svg class="icongender" aria-hidden="true">
+                    <use xlink:href="#icon-nansheng"></use>
+                </svg>
+                <div>我是男生</div>
+            </div>
+            <div class="female gender-off">
+                <svg class="icongender" aria-hidden="true">
+                    <use xlink:href="#icon-nvsheng"></use>
+                </svg>
+                <div>我是女生</div>
             </div>
         </div>
-        <div class="bottompanel">
-            <div class="bar"></div>
-            <svg class="iconpost" aria-hidden="true">
-                <use xlink:href="#icon-aixin"></use>
-            </svg>
+        <div class="box-message">
+            <input name="openid" id="openid" style="display:none;" value="{$openid}">
+            <div class="message-towhom">
+                FROM:&nbsp;
+                <input type="text" name="sender" placeholder="某某">
+                <div class="anonymous">匿名</div>
+            </div>
+            <div class="message-towhom">
+                TO:&nbsp;
+                <input type="text" name="receiver" placeholder="某某">
+            </div>
+            <div class="message-text">
+                <textarea class="weui-textarea" placeholder="想说却还没说的" rows="3" name="text"></textarea>
+                <div class="weui-textarea-counter"><span id="enterchar">0</span>/200</div>
+            </div>
         </div>
-        <div class="mask"></div>
-        <form class="bomb-box" action="/home/lovewall/post" method="post">
-            <div class="box-gender">
-                <input name="gender" style="display:none;" id="hidden" value="0">
-                <div class="male">
-                    <svg class="icongender" aria-hidden="true">
-                        <use xlink:href="#icon-nansheng"></use>
-                    </svg>
-                    <div>我是男生</div>
-                </div>
-                <div class="female gender-off">
-                    <svg class="icongender" aria-hidden="true">
-                        <use xlink:href="#icon-nvsheng"></use>
-                    </svg>
-                    <div>我是女生</div>
-                </div>
-            </div>
-            <div class="box-message">
-                <input name="openid" style="display:none;" value="{$openid}">
-                <div class="message-towhom">
-                    FROM:&nbsp;
-                    <input type="text" name="sender" placeholder="某某">
-                    <div class="anonymous">匿名</div>
-                </div>
-                <div class="message-towhom">
-                    TO:&nbsp;
-                    <input type="text" name="receiver" placeholder="某某">
-                </div>
-                <div class="message-text">
-                    <textarea class="weui-textarea" placeholder="想说却还没说的" rows="3" name="text"></textarea>
-                    <div class="weui-textarea-counter"><span id="enterchar">0</span>/200</div>
-                </div>
-            </div>
-            <div class="box-send">
-                <button type="submit">发 &nbsp;&nbsp; 送</button>
-            </div>
-        </form>
-        <div class="cancel">
-            <svg class="iconcancel" aria-hidden="true">
-                <use xlink:href="#icon-close"></use>
-            </svg>
+        <div class="box-send">
+            <button type="submit">发 &nbsp;&nbsp; 送</button>
         </div>
+    </form>
+    <div class="cancel">
+        <svg class="iconcancel" aria-hidden="true">
+            <use xlink:href="#icon-close"></use>
+        </svg>
+    </div>
     </div>
 </block>
 <block name="script">
-    <script type="text/javascript" src="//at.alicdn.com/t/font_cty8l93th6jyk3xr.js"></script>
+    <script type="text/javascript" src="//at.alicdn.com/t/font_nhvh6mu77u0ltyb9.js"></script>
+    <script src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
     <script type="text/javascript">
     $(document).ready(function() {
-        $('.mask').hide();
-        $('.bomb-box').hide();
-        $('.cancel').hide();
-
-
 
         $('.weui-textarea').on('keyup', function(event) {
             var len = $(this).val().length;
@@ -166,22 +104,68 @@
             } else {
                 $('#enterchar').text(len);
             }
-        });
+        });      
 
-        $('.toppanel-box').click(function() {
-            $('.toppanel-box').each(function() {
-                $(this).removeClass("toppanel-box-on");
-            });
+        var num=0;
+        var type="time";
+        var mainviewlength_before=0;
+        var mainviewlength_after=0;
+        num=getpost(num,type);
+
+        $('#sortTime').click(function() {
             $(this).addClass("toppanel-box-on");
+            $('#sortLike').removeClass("toppanel-box-on");
+            $('.mainview').html("");
+            num=0;
+            type="time";
+            num=getpost(num,type);
+
+        });
+        $('#sortLike').click(function(){
+            $(this).addClass("toppanel-box-on");
+            $('#sortTime').removeClass("toppanel-box-on");
+            $('.mainview').html("");
+            num=0;
+            type="like";
+            num=getpost(num,type);
+
         });
 
-        $('.dialog-bottompanel-like').click(function() {
-            if ($(this).find("use").attr("xlink:href") == "#icon-like") {
-                $(this).find("span").text(parseInt($(this).find("span").text()) + 1);
-                $(this).find("use").attr("xlink:href", "#icon-dianzan");
-            } else {
-                $(this).find("span").text(parseInt($(this).find("span").text()) - 1);
-                $(this).find("use").attr("xlink:href", "#icon-like");
+
+
+        $('.mainview').on('click','.dialog-bottompanel-like',function(event) {
+            if ($(event.target).find("use").attr("xlink:href") == "#icon-like") {
+                $(event.target).find("span").text(parseInt($(event.target).find("span").text()) + 1);
+                $(event.target).find("use").attr("xlink:href", "#icon-dianzan");
+                var postid = $(event.target).find('.hidden-postid').text();
+                if(window.localStorage){
+                	var storage=window.localStorage;
+
+					var data=JSON.parse(storage.getItem("liked-posts"))||[];
+					data.push(postid);
+					var stringdata=JSON.stringify(data);
+		            storage.setItem("liked-posts",stringdata);
+
+                }
+                $.post("/home/lovewall/ajaxLike",{postid:postid,type:"1"},function(data){});
+
+            } else if ($(event.target).find("use").attr("xlink:href") == "#icon-dianzan") {
+                $(event.target).find("span").text(parseInt($(event.target).find("span").text()) - 1);
+                $(event.target).find("use").attr("xlink:href", "#icon-like");
+                var postid = $(event.target).find('.hidden-postid').text();                
+                if(window.localStorage){
+                	var storage=window.localStorage;
+
+					var data=JSON.parse(storage.getItem("liked-posts"))||[];
+					for(var i=0;i<data.length;i++){
+						if(data[i]==postid)
+							data.splice(i,1);
+					}
+
+					var stringdata=JSON.stringify(data);
+		            storage.setItem("liked-posts",stringdata);
+                }
+                $.post("/home/lovewall/ajaxLike",{postid:postid,type:"0"},function(data){});
             }
 
         });
@@ -190,6 +174,8 @@
             $('.mask').slideToggle(500);
             $('.bomb-box').slideToggle(500);
             $('.cancel').slideToggle(500);
+            $('body').css("overflow","hidden");
+            // $('body').css("position","fixed");
 
         });
 
@@ -197,6 +183,8 @@
             $('.mask').slideToggle(500);
             $('.bomb-box').slideToggle(500);
             $('.cancel').slideToggle(500);
+            $('body').css("overflow","");
+
         });
 
         $('.female').click(function() {
@@ -204,107 +192,399 @@
             $(this).removeClass("gender-off");
             $('.box-message').addClass("box-message-right");
             $('.box-send').addClass("box-send-right");
-            $('#hidden').attr("value","1");
+            $('#hidden').attr("value", "1");
         });
         $('.male').click(function() {
             $('.female').addClass("gender-off");
             $(this).removeClass("gender-off");
             $('.box-message').removeClass("box-message-right");
             $('.box-send').removeClass("box-send-right");
-            $('#hidden').attr("value","0");
+            $('#hidden').attr("value", "0");
         });
 
         $('.anonymous').click(function() {
             if ($(this).hasClass("anonymous-on")) {
                 $(this).removeClass("anonymous-on");
-                $(this).siblings("input").attr("value","");
+                $(this).siblings("input").attr("value", "");
                 $(this).siblings("input").show(200);
             } else {
                 $(this).addClass("anonymous-on");
                 $(this).siblings("input").hide(200);
-                $(this).siblings("input").attr("value","匿名");
+                $(this).siblings("input").attr("value", "匿名");
             }
         });
 
-        var myScroll,
-            pullDown = $("#pullDown"),
-            pullUp = $("#pullUp"),
-            pullDownLabel = $(".pullDownLabel"),
-            pullUpLabel = $(".pullUpLabel"),
-            container = $('.mainview'),
-            loadingStep = 0; //加载状态0默认，1显示加载状态，2执行加载数据，只有当为0时才能再次加载，这是防止过快拉动刷新  
+        function getpost(num,type) {
+            var v=$('#openid').attr("value");
+            $.ajax({url:'/home/lovewall/ajaxGetpost',data:{
+                page: num,
+                type: type
+            },
+                success:function(data) {
+                    var arr = [];
+                    $.each(data, function(i, e) {
+                        if(e.gender==1){
+                            arr.push('<div class="mainview-box mainview-box-reverse">')
+                        }
+                        else arr.push('<div class="mainview-box">')
 
-        pullDown.hide();
-        pullUp.hide();
+                        arr.push(
+                            '<div style="display:none;" class="hidden-gender">'+e.gender+'</div>'+
+                            '<div class="mainview-box-dialog">' +
+                            '<div class="dialog-toppanel">' +
+                            '<svg class="icon" aria-hidden="true">' +
+                            '<use xlink:href='+e.image+'></use>' +
+                            '</svg>' +
+                            '<div class="fromwho">' + e.sender + '</div>' +
+                            '<div class="towhom">To ' + e.receiver + '</div>' +
+                            '<div class="time">' + e.sendtime + '</div>' +
+                            '</div>' +
+                            '<a class="text" href="lovewallDetail?postid='+e.postid+'&openid='+v+'">' + e.text + '</a>' +
+                            '<div class="dialog-bottompanel">' +
+                            '<div class="dialog-bottompanel-like">' +
+                            '<div style="display:none;" class="hidden-postid">'+e.postid+'</div>'+
+                            '<svg class="iconlike" aria-hidden="true">' +
+                            '<use xlink:href="#icon-like"></use>' +
+                            '</svg>' +
+                            '<span class="count">' + e.like_number + '</span>' +
+                            '</div>' +
+                            '<a class="dialog-bottompanel-comment" href="lovewallDetail?postid='+e.postid+'&openid='+$('#openid').attr("value")+'">' +
+                            '<svg class="iconcomment" aria-hidden="true">' +
+                            '<use xlink:href="#icon-pinglun1"></use>' +
+                            '</svg>' +
+                            '<span class="count">' + e.comment_number + '</span>' +
+                            '</a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>')
+                    });
+                    var html = arr.join('');
+                    $('.mainview').append(html);
+                },
+                complete:function(){
+                    $('.dialog-bottompanel-like').each(function(){
+                        console.log("lalala");
+                        var storage = window.localStorage;
+                        var data=JSON.parse(storage.getItem("liked-posts"))||[];
+                        for(var i=0;i<data.length;i++){
+                            if(data[i]==$(this).find('.hidden-postid').text())
+                                $(this).find("use").attr("xlink:href", "#icon-dianzan");
+                        }
+                    });
+                    mainviewlength_after=$('.mainview').children().length;
+                    if(mainviewlength_after==mainviewlength_before){
+                        $('.loadmore').text("没有更多啦");
+                    }else{
+                        $('.loadmore').text("正在加载中…");
+                        }
+                }
 
-        myScroll = new IScroll("#wrapper", {
-            scrollbars: false,
-            mouseWheel: false,
-            interactiveScrollbars: true,
-            shrinkScrollbars: 'scale',
-            fadeScrollbars: true,
-            scrollY: true,
-            probeType: 2,
-            bindToWrapper: true
-        });
-        myScroll.on("scroll", function() {
-            if (loadingStep == 0 && !pullDown.attr("class").match('refresh|loading') && !pullUp.attr("class").match('refresh')) {
-                if (this.y > 40) { //下拉刷新操作  
-                    $(".pulldown-tips").hide();
-                    pullDown.addClass("refresh").show();
-                    pullDownLabel.text("松手刷新数据");
-                    loadingStep = 1;
-                    myScroll.refresh();
-                } else if (this.y < (this.maxScrollY - 14)) { //上拉加载更多  
-                    pullUp.addClass("refresh").show();
-                    pullUpLabel.text("正在载入");
-                    loadingStep = 1;
-                    pullUpAction();
-                }
-            }
-        });
-        myScroll.on("scrollEnd", function() {
-            if (loadingStep == 1) {
-                if (pullDown.attr("class").match("refresh")) { //下拉刷新操作  
-                    pullDown.removeClass("refresh").addClass("loading");
-                    pullDownLabel.text("正在刷新");
-                    loadingStep = 2;
-                    pullDownAction();
-                }
-            }
-        });
-
-        function pullDownAction() {
-            setTimeout(function() {
-                var li, i;
-                for (i = 0, li = ""; i < 3; i++) {
-                    li += "<li>" + "new Add " + new Date().toLocaleString() + " ！" + "</li>";
-                }
-                container.prepend(li);
-                pullDown.attr('class', '').hide();
-                myScroll.refresh();
-                loadingStep = 0;
-                $(".pulldown-tips").show();
-            }, 1000);
+            });
+            mainviewlength_before=$('.mainview').children().length;
+            num+=5;
+            return num;
         }
 
-        function pullUpAction() {
-            setTimeout(function() {
-                var li, i;
-                for (i = 0, li = ""; i < 3; i++) {
-                    li += "<li>" + "new Add " + new Date().toLocaleString() + " ！" + "</li>";
+        var range = 40; //距下边界长度/单位px  
+        var totalheight = 0;
+        var srollPos = 0;
+        var srollPosRecord = 0;
+        var START = undefined,
+            LIMIT = 100,
+
+            LIST = $('.list__wrapper'),
+            CURVE = $('#curve'),
+            CIRCLE = $('#circle'),
+            FRICTION = 1,
+            FPS = 35,
+            DIFFERENCE,
+            ANIMATING,
+            TRANSLATE_HEIGHT = 90,
+            REACHED_END = false,
+            CURVE_HEIGHT = 190,
+            START_CURVE = 'M-10 90 Q 161 90 332 90',
+            END_CURVE = 'M-10 90 Q 161 120 332 90';
+
+        $(".list__wrapper").on('touchstart mousedown', function(event) {
+            // event.stopPropagation(); 
+            // event.preventDefault();
+            START = event.clientY || event.originalEvent.touches[0].clientY || event.originalEvent.changedTouches[0].clientY;
+
+            $(window).on('touchmove mousemove', function(event) {
+
+                console.log("start" + START);
+                if (ANIMATING) {
+                    return false;
                 }
-                container.append(li);
-                pullUp.attr('class', '').hide();
-                myScroll.refresh();
-                loadingStep = 0;
-            }, 1000);
+                if (event.type === 'touchmove') {
+                    var touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+                    DIFFERENCE = (START - touch.clientY) * (-1);
+                    console.log("DI" + DIFFERENCE);
+                    srollPos = $(window).scrollTop(); //滚动条距顶部距离(页面超出窗口的高度)   
+                    console.log("srollPos" + srollPos);
+
+                } else {
+                    DIFFERENCE = (START - event.clientY) * (-1);
+                }
+                if (DIFFERENCE < 0) {
+
+                    totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+                    // $('.toppanel').offset({top:srollPos,left:0});
+                    if (($(document).height() - range) <= totalheight) {
+                        num=getpost(num,type);
+                    }
+                } else {
+
+                    if (srollPosRecord == 0 && srollPos == 0) {
+                        event.stopPropagation();
+                        event.preventDefault();
+
+                        if (DIFFERENCE < TRANSLATE_HEIGHT) {
+                            translateSVG(DIFFERENCE);
+                            setOpacity(DIFFERENCE);
+                            REACHED_END = false;
+
+                        } else if (DIFFERENCE > TRANSLATE_HEIGHT && DIFFERENCE < CURVE_HEIGHT) {
+                            outerCurve(DIFFERENCE);
+                            setOpacity(DIFFERENCE);
+                            REACHED_END = false;
+                        } else if (DIFFERENCE >= CURVE_HEIGHT) {
+                            REACHED_END = true;
+                        }
+                    }
+                }
+            });
+        });
+
+        $(window).on('touchend mouseup', function(event) {
+            srollPosRecord = srollPos;
+            console.log("record" + srollPosRecord);
+            DIFFERENCE = 0;
+            START = 0;
+            if (REACHED_END) {
+                runAnimation();
+                $('.mainview').html("");
+                    num=0;
+                    num=getpost(num,type);
+            } else {
+                backToStart();
+            }
+            $(window).off('mousemove');
+        });
+
+        function backToStart() {
+            if (DIFFERENCE > TRANSLATE_HEIGHT) {
+                setTimeout(function() {
+                    $({
+                        x: parseInt($('.list__wrapper').css('transform').split(',')[5])
+                    }).animate({
+                        x: -186
+                    }, {
+                        duration: 300,
+                        step: function(now) {
+                            $('.list__wrapper').css({
+                                transform: 'translate3d(0,' + now + 'px,0)'
+                            })
+                        }
+                    });
+                }, 100);
+                $('.mainview').velocity({
+                    opacity: 1,
+                    duration: 300,
+                    delay: 200
+                });
+
+                $("#curve").velocity({
+                    tween: [90, DIFFERENCE]
+                }, {
+                    duration: 150,
+                    loop: false,
+                    /*easing: [ 300, 8 ],*/
+                    easing: 'easeOutCubic',
+                    progress: function(e, c, r, s, t) {
+                        if (t > 90) {
+                            $('#curve').attr('fill', '#8B90B1');
+                        } else {
+                            $('#curve').attr('fill', 'white');
+                        }
+                        createCurve(t);
+                    }
+                });
+            } else {
+                $({
+                    x: parseInt($('.list__wrapper').css('transform').split(',')[5])
+                }).animate({
+                    x: -186
+                }, {
+                    duration: 300,
+                    step: function(now) {
+                        $('.list__wrapper').css({
+                            transform: 'translate3d(0,' + now + 'px,0)'
+                        })
+                    }
+                });
+                $('.mainview').velocity({
+                    opacity: 1,
+                    duration: 300,
+                    delay: 200
+                });
+                $("#curve").velocity({
+                    tween: [90, DIFFERENCE]
+                }, {
+                    duration: 150,
+                    loop: false,
+                    /*easing: [ 300, 8 ],*/
+                    easing: 'easeOutCubic',
+                    progress: function(e, c, r, s, t) {
+                        if (t > 90) {
+                            $('#curve').attr('fill', '#8B90B1');
+                        } else {
+                            $('#curve').attr('fill', 'white');
+                        }
+                        createCurve(t);
+                    }
+                });
+            }
         }
 
-        document.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, false);
+        function translateSVG(offset) {
+            var dist = offset - 186;
+            if (dist > -188) {
+                $(LIST).css({
+                    transform: 'translate3d(0,' + dist + 'px,0)'
+                });
+            }
+        }
 
+        function setOpacity(distance) {
+            distance = 140 - distance;
+            var pct = distance / 140;
+            $('.mainview').css({
+                opacity: pct
+            });
+        }
+
+        function runAnimation() {
+            ANIMATING = true;
+
+            $('svg:first-child').css({
+                'filter': 'url(#goo)',
+                '-webkit-filter': 'url(#goo)',
+                '-moz-filter': 'url(#goo)',
+                '-o-filter': 'url(#goo)',
+                '-ms-filter': 'url(#goo)'
+            });
+            $("#curve").velocity({
+                tween: [90, 200]
+            }, {
+                duration: 700,
+                loop: false,
+                easing: [0, 3, .3, 0.4],
+                progress: function(e, c, r, s, t) {
+                    console.log("b"+t);
+                    if (t > 90) {
+                        $('#curve').attr('fill', '#8B90B1');
+                    } else {
+                        $('#curve').attr('fill', 'white');
+                    }
+                    createCurve(t);
+                }
+            });
+            setTimeout(function() {
+                $('#circle_group').attr({
+                    'cy': 110
+                });
+                $('#circle').attr({
+                    fill: 'rgba(255,255,255,1)'
+                });
+                $('#circle').velocity({
+                    cy: 45
+                }, {
+                    duration: 200,
+                    easing: 'easeOutSine'
+                });
+
+                $('#progress').velocity({
+                    strokeDashoffset: 0
+                }, {
+                    duration: 800,
+                    delay: 300
+                });
+                $('svg:nth-child(2)').velocity({
+                    scale: 1.15,
+                    opacity: 0,
+                }, {
+                    duration: 400,
+                    delay: 1200,
+                    easing: [.11, 1, .34, .98]
+                });
+                setTimeout(function() {
+                    $('#curve').attr('d', END_CURVE);
+                }, 1450);
+                setTimeout(function() {
+                    $('svg:first-child').css({
+                        'filter': 'none',
+                        '-webkit-filter': 'none',
+                        '-moz-filter': 'none',
+                        '-o-filter': 'none',
+                        '-ms-filter': 'none'
+                    });
+                }, 1800);
+                $('#circle').velocity({
+                    cy: 140
+                }, {
+                    duration: 450,
+                    delay: 1300,
+                    complete: function() {
+                        $('#curve').attr('d', START_CURVE);
+                        $({
+                            x: parseInt($('.list__wrapper').css('transform').split(',')[5])
+                        }).animate({
+                            x: -186
+                        }, {
+                            step: function(now) {
+                                $('.list__wrapper').css({
+                                    transform: 'translate3d(0,' + now + 'px,0)'
+                                })
+                            }
+                        });
+                        $('.mainview').velocity({
+                            opacity: 1
+                        }, 500);
+                        $('#circle').attr('cy', 190);
+                        $('#circle').attr({
+                            fill: 'rgba(255,255,255,0)'
+                        });
+                        $('#progress').css({
+                            strokeDashoffset: 345.6
+                        });
+                        $('svg:nth-child(2)').velocity({
+                            scale: 1,
+                            opacity: 1
+                        }, 0)
+                        REACHED_END = false;
+                        ANIMATING = false;
+                    }
+                })
+            }, 50);
+
+        };
+
+        function outerCurve(height) {
+            var FRICTION_HEIGHT = height * FRICTION;
+            var d = "M0 90 Q 161 " + FRICTION_HEIGHT + " 322 90"
+            $(CURVE).attr({
+                d: d,
+                fill: '#8B90B1'
+            });
+        }
+
+        function createCurve(height) {
+            var FRICTION_HEIGHT = height * FRICTION;
+            var d = "M-10 90 Q 161 " + FRICTION_HEIGHT + " 332 90"
+            $(CURVE).attr('d', d);
+        }
     });
+                
     </script>
 </block>

@@ -1,0 +1,56 @@
+<extend name="Public:layout" />
+<block name="content">
+    <div class="lovewallDetail">
+        <div class="toppanel">
+            <div class="mainview-box mainview-box-reverse">
+                <div class="mainview-box-dialog">
+                    <div class="dialog-toppanel">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="{$post[image]}"></use>
+                        </svg>
+                        <div class="fromwho">{$post[sender]}</div>
+                        <div class="towhom">To {$post[receiver]}</div>
+                        <div class="time">{$post[sendtime]}</div>
+                    </div>
+                    <div class="text">{$post[text]}</div>
+                </div>
+            </div>
+        </div>
+        <div class="mainview">
+            <volist name="result" id="vo">
+                <div class="mainview-box">
+                    <div class="mainview-box-icon">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="{$vo[image]}"></use>
+                        </svg>
+                    </div>
+                    <div class="mainview-box-dialog">
+                        <div class="text">{$vo[text]}</div>
+                        <div class="time">{$vo[sendtime]}</div>
+                        <div class="eachopenid" style="display:none;">{$vo[openid]}</div>
+                    </div>
+                </div>
+            </volist>
+        </div>
+        <form class="bottompanel" action="/home/lovewall/comment" method="post">
+            <div class="bottompanel-input">
+            	<input name="openid" type="hidden" id="openid" value="{$openid}">
+            	<input name="postid" style="display:none;" value="{$postid}">
+                <input type="text" name="comment" placeholder="发表评论">
+            </div>
+            <button type="submit">发送</button>
+        </form>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript" src="//at.alicdn.com/t/font_nhvh6mu77u0ltyb9.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+            console.log($('#openid').attr("value"));
+    		$('.eachopenid').each(function(){
+    			if($(this).text()==$('#openid').attr("value"))
+    				$(this).parent().parent().addClass("mainview-box-reverse");
+    		});
+    	});
+    </script>
+</block>

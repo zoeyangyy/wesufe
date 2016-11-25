@@ -1,5 +1,6 @@
 <extend name="Public:layout"/>
 <block name="content">
+<div class="course">
     <div class="swiper-container swiper-container-horizontal">
         <div class="swiper-background"></div>
         <div class="swiper-frame"></div>
@@ -40,18 +41,18 @@
                 <div class="panel-bd-box">
                 	<div class="hidden" style="display:none;">{$vo[weekday]}</div>
                     <div class="panel-bd-box-time">
-                        <p class="start-time">{$vo[lessons][0][time]}</p>
-                        <p class="end-time">{$vo[lessons][0][time]}</p>
+                        <p class="start-time">{$vo[time]}</p>
+                        <p class="end-time">{$vo[time]}</p>
                     </div>
-                    <div class="panel-bd-box-icon"><i class="iconfont">&#x3442;</i></div>
+                    <div class="panel-bd-box-icon"><i class="iconfont">{$vo[icon]}</i></div>
                     <div class="panel-bd-box-course">
-                        <h4 class="course-title">{$vo[lessons][0][lessonName]}</h4>
-                        <p>{$vo[lessons][0][teacher]} &nbsp;&nbsp;&nbsp; {$vo[lessons][0][duration]}</p>
+                        <h4 class="course-title">{$vo[lessonName]}</h4>
+                        <p>{$vo[teacher]} &nbsp;&nbsp;&nbsp; {$vo[duration]}</p>
                     </div>
                     <div class="panel-bd-box-place">
-                    	<div class="hidden2" style="display:none;">{$vo[lessons][0][isMajor]}</div>
+                    	<div class="hidden2" style="display:none;">{$vo[isMajor]}</div>
                         <div class="ismajor">专业课</div>
-                        <p>{$vo[lessons][0][place]}</p>
+                        <p>{$vo[place]}</p>
                     </div>
                 </div>
             </volist>
@@ -60,6 +61,7 @@
             今天没有课啦！
         </div>
     </div>
+  </div>  
 </block>
 
 <block name="script">

@@ -34,6 +34,7 @@
         <div class="panel">
             <div class="panel-bd">
             </div>
+            <div class="loadmore">正在加载中</div>
         </div>
     </div>
 
@@ -46,22 +47,38 @@
         var num = 1;
         var totalheight = 0;
         num = getbook(num);
+        console.log("num"+num);
+        
+        if($('.panel-bd').children().length==0)
+        $('.loadmore').text("没有找到相关图书");
+        
         $(window).scroll(function() {
             var srollPos = $(window).scrollTop(); //滚动条距顶部距离(页面超出窗口的高度)   
             totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+
             if (($(document).height() - range) <= totalheight) {
                 num = getbook(num);
+                if(num==0){
+                    $('.loadmore').text("没有更多了");
+                }
             }
         });
+    
+
     });
 
-    function getbook(num) {
+function getbook(num) {
         var book = $('#searchInput').data('keyword');
-        $.get('/home/learn/ajaxGetbook', {
+        $.ajax({type:'GET',url:'/home/learn/ajaxGetbook',data:{
                 book: book,
                 page: num
             },
-            function(data) {
+            success:function(data) {
+                console.log("datalength"+data.length);
+                if(data.length==0){
+                    console.log("guolailma");
+                    return 0;
+                }
                 var arr = [];
                 $.each(data, function(i, e) {
                     arr.push('<a class="panel-bd-box" href="bookitem?url=' + e.url + '&bookname='+e.bookname+'&author='+e.author+'">' +
@@ -78,10 +95,15 @@
                 });
                 var html = arr.join('');
                 $('.panel-bd').append(html);
-            }
+            },
+            error:function(){
+                return 0;
+            }}
         );
+        console.log("diyici");
         return ++num;
     }
+    
     </script>
     <script type="text/javascript" class="searchbar js_show">
     $(function() {

@@ -45,6 +45,7 @@
     </div>
 
     <script type="text/javascript" src="/Public/js/vendor.js"></script>
+    <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>
     
     <script type="text/javascript">
         $(document).ready(function() {

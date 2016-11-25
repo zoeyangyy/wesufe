@@ -20,8 +20,8 @@ class WeixinController extends Controller {
 						),
 						1 => array(
 							'type' => 'view',
-							'name' => '图书查询',
-							'url' => C('WEB_ROOT').'/home/learn/librarysearch',
+							'name' => '考试安排',
+							'url' => C('WEB_ROOT').'/home/learn/exam',
 						),
 						2 => array(
 							'type' => 'click',
@@ -32,15 +32,9 @@ class WeixinController extends Controller {
 				),
 				
 				1 => array(
-					'name' => '生活贴士',
-					'sub_button' => array(
-						0 => array(
-							'type' => 'view',
-							'name' => 'aaa',
-							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/'),
-						),
-					),
-					
+					'name' => '图书查询',
+					'type' => 'view',
+					'url' => C('WEB_ROOT').'/home/learn/librarysearch',		
 				),
 				2 => array(
 					'name' => '表白墙',
@@ -89,8 +83,8 @@ class WeixinController extends Controller {
 						),
 						1 => array(
 							'type' => 'view',
-							'name' => '图书查询',
-							'url' => C('WEB_ROOT').'/home/learn/librarysearch',
+							'name' => '考试安排',
+							'url' => C('WEB_ROOT').'/home/learn/exam',
 						),
 						2 => array(
 							'type' => 'click',
@@ -101,15 +95,9 @@ class WeixinController extends Controller {
 				),
 				
 				1 => array(
-					'name' => '生活贴士',
-					'sub_button' => array(
-						0 => array(
-							'type' => 'view',
-							'name' => 'aaa',
-							'url' => $weObj->getOauthRedirect(C('WEB_ROOT').'/home/'),
-						),
-					),
-					
+					'name' => '图书查询',
+					'type' => 'view',
+					'url' => C('WEB_ROOT').'/home/learn/librarysearch',		
 				),
 				2 => array(
 					'name' => '表白墙',
@@ -146,12 +134,27 @@ class WeixinController extends Controller {
 				{
 					$data['subscribe']="1";
 					$data['subscribe_time']=date('Y-m-d H:i:s');
+
+					$numbers = range (1,40); 
+					shuffle ($numbers); 
+					//array_slice 取该数组中的某一段 
+					$result = array_slice($numbers,0,1);
+					if($result[0]<10)
+						$data['image']="#icon-0".$result[0];
+					else $data['image']="#icon-".$result[0];
 					$User->add($data);
 				}
 				else
 				{
 					$User->subscribe="1";
 					$User->subscribe_time=date('Y-m-d H:i:s');
+					$numbers = range (1,40); 
+					shuffle ($numbers); 
+					//array_slice 取该数组中的某一段 
+					$result = array_slice($numbers,0,1);
+					if($result[0]<10)
+						$User->image="#icon-0".$result[0];
+					else $User->image="#icon-".$result[0];
 					$User->where(array('openid'=>$openid))->save();
 				}
 				break;
