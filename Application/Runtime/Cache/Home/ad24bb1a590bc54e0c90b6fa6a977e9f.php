@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,maximum-scale=1,initial-scale=1,user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
     <title><?php echo ($title); ?></title>
     <link rel="stylesheet" type="text/css" href="/Public/css/vendor.css" />
     <link rel="stylesheet" type="text/css" href="/Public/css/main.css" />
@@ -47,22 +48,22 @@
     <script type="text/javascript">
     $(document).ready(function() {
 
-        var mydate = new Date();
-        var today = new Array('周日', '周一', '周二', '周三', '周四', '周五', '周六');
-        //判断已完成课程和当前课程
-        $('.panel-bd-box').each(function() {
-            var starttime = $(this).find('.start-time').text();
-            var endtime = $(this).find('.end-time').text();
-            var minutes_start = parseInt(starttime.substr(0, 2), 10) * 60 + parseInt(starttime.substr(3, 2), 10);
-            var minutes_end = parseInt(endtime.substr(0, 2), 10) * 60 + parseInt(endtime.substr(3, 2), 10);
-            var minutes_now = mydate.getHours() * 60 + mydate.getMinutes();
-            if ($(this).find('.hidden').text() == mydate.getDay()) {
-                if (minutes_end < minutes_now)
-                    $(this).addClass("panel-bd-box-done");
-                if (minutes_now > minutes_start & minutes_now < minutes_end)
-                    $(this).addClass("panel-bd-box-on");
-            }
-        });
+        // var mydate = new Date();
+        // var today = new Array('周日', '周一', '周二', '周三', '周四', '周五', '周六');
+        // //判断已完成课程和当前课程
+        // $('.panel-bd-box').each(function() {
+        //     var starttime = $(this).find('.start-time').text();
+        //     var endtime = $(this).find('.end-time').text();
+        //     var minutes_start = parseInt(starttime.substr(0, 2), 10) * 60 + parseInt(starttime.substr(3, 2), 10);
+        //     var minutes_end = parseInt(endtime.substr(0, 2), 10) * 60 + parseInt(endtime.substr(3, 2), 10);
+        //     var minutes_now = mydate.getHours() * 60 + mydate.getMinutes();
+        //     if ($(this).find('.hidden').text() == mydate.getDay()) {
+        //         if (minutes_end < minutes_now)
+        //             $(this).addClass("panel-bd-box-done");
+        //         if (minutes_now > minutes_start & minutes_now < minutes_end)
+        //             $(this).addClass("panel-bd-box-on");
+        //     }
+        // });
 
         changetype();
         $('#LargeScale').click(function() {

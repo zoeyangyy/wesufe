@@ -8,7 +8,7 @@ class LearnController extends Controller {
 
 		$User = M('User');
 		$openid=$_GET['openid'];
-		$condition['openid'] = $openid;
+		$condition['openid'] = 'ov7LNwfazjMQ60UKDKr25URwJpzY'; //要替换成openid！！！！
 
 		$stuNo=$User->where($condition)->getField('stuNo');
 		$accessToken=$User->where($condition)->getField('accessToken');
@@ -26,11 +26,33 @@ class LearnController extends Controller {
 				array_push($array,$arr);
 			}
 		}
+		$orderlist = $array;
+		
+		for($i=1;$i<count($orderlist);$i++){
+			$key = $orderlist[$i];
+			$j=$i-1;
+			
+			while($j>=0 && LearnController::insertSort2($orderlist[$j],$key))
+				{	
+					$orderlist[$j+1]=$orderlist[$j];
+					$j=$j-1;					
+				}
+			$orderlist[$j+1]=$key;
+				
+		}
 
-        $this->assign('timetable',$array);
+        $this->assign('timetable',$orderlist);
         $this->assign('title','课程表');
 		$this->display();
 		
+	}
+	public function insertSort2($datej,$datei){
+		$countj=(int)substr($datej["time"],0,2);
+		$counti=(int)substr($datei["time"],0,2);
+		if($countj>$counti)
+			return true;
+		if($countj<$counti)
+			return false;
 	}
 
 	public function librarysearch(){
@@ -69,14 +91,21 @@ class LearnController extends Controller {
 	public function score() {
 		$User = M('User');
 		$openid=$_GET['openid'];
-		$condition['openid'] = $openid;
-		
+		$condition['openid'] = 'ov7LNwZrsw_jpkkwhrSq_j2ognxo'; //要替换成openid！！！！
+		// 'ov7LNwfazjMQ60UKDKr25URwJpzY'
 		$stuNo=$User->where($condition)->getField('stuNo');
 		$accessToken=$User->where($condition)->getField('accessToken');
-		$json = file_get_contents("http://weixin.sufe.edu.cn/api/std/gpasummary?oauth_consumer_key=4f6p8203&clientip=CLIENTIP&oauth_version=2.a&scope=all&access_token=".$accessToken."&openid=".$stuNo);
-		$obj = json_decode($json,true);
-		dump($obj);
-        
+		$jsonGPA = file_get_contents("http://weixin.sufe.edu.cn/api/std/gpasummary?oauth_consumer_key=4f6p8203&clientip=CLIENTIP&oauth_version=2.a&scope=all&access_token=".$accessToken."&openid=".$stuNo);
+		$jsonGPAdetail= file_get_contents("http://weixin.sufe.edu.cn/api/std/gpa?oauth_consumer_key=4f6p8203&clientip=CLIENTIP&oauth_version=2.a&scope=all&access_token=".$accessToken."&openid=".$stuNo);
+		// ."&semesterId=2015-2016-2"
+		$GPA = json_decode($jsonGPA,true);
+		$GPAdetail = json_decode($jsonGPAdetail,true);
+		// dump($GPA);
+		// dump($GPAdetail["gpa"]);
+		
+		$this->assign('summary',$GPA);
+		$this->assign('detail',$GPAdetail["gpa"]);
+        $this->assign('title',"成绩查询");
 		$this->display();
 
 	}
@@ -88,12 +117,41 @@ class LearnController extends Controller {
 		
 		$stuNo=$User->where($condition)->getField('stuNo');
 		$accessToken=$User->where($condition)->getField('accessToken');
-		// $json = file_get_contents("http://weixin.sufe.edu.cn/api/std/examArrangement?oauth_consumer_key=4f6p8203&clientip=CLIENTIP&oauth_version=2.a&scope=all&access_token=".$accessToken."&openid=".$stuNo);
-		$json = '{"arrangement":[{"name":"中国近现代史纲要","exam_type":"大规模考","examdate":"2016-11-25","examtime":"14:00-16:00","place":"三教302","status":"期末考试","week":"星期二","week_no":"18"},{"name":"回归分析","exam_type":"提前考","examdate":"2016-10-20","examtime":"13:00-15:00","place":"三教201","status":"期末考试","week":"星期二","week_no":"15"},{"name":"运营管理I","exam_type":"提前考","examdate":"2016-12-06","examtime":"13:00-15:00","place":"三教507","status":"期末考试","week":"星期二","week_no":"13"},{"name":"计算机应用","exam_type":"大规模考","examdate":"2017-01-03","examtime":"12:30-14:30","place":"机房6","status":"期末考试","week":"星期二","week_no":"17"}]}';
+		$json = file_get_contents("http://weixin.sufe.edu.cn/api/std/examArrangement?oauth_consumer_key=4f6p8203&clientip=CLIENTIP&oauth_version=2.a&scope=all&access_token=".$accessToken."&openid=".$stuNo);
+		// $json = '{"arrangement":[{"name":"计算机应用","exam_type":"大规模考","examdate":"2016-11-26","examtime":"12:30-14:30","place":"机房6","status":"期末考试","week":"星期二","week_no":"17"},{"name":"运营管理I","exam_type":"提前考","examdate":"2016-12-06","examtime":"13:00-15:00","place":"三教507","status":"期末考试","week":"星期二","week_no":"13"},{"name":"中国近现代史纲要","exam_type":"大规模考","examdate":"2017-01-10","examtime":"14:00-16:00","place":"三教302","status":"期末考试","week":"星期二","week_no":"18"},{"name":"回归分析","exam_type":"提前考","examdate":"2016-12-20","examtime":"13:00-15:00","place":"三教201","status":"期末考试","week":"星期二","week_no":"15"}]}';
 		$obj = json_decode($json,true);
-        
-        $this->assign("exam",$obj["arrangement"]);
+		$orderlist = $obj["arrangement"];
+
+		for($i=1;$i<count($orderlist);$i++){
+			$key = $orderlist[$i];
+
+			$j=$i-1;
+			
+			while($j>=0 && LearnController::insertSort($orderlist[$j],$key))
+				{	
+					$orderlist[$j+1]=$orderlist[$j];
+					$j=$j-1;					
+				}
+			$orderlist[$j+1]=$key;
+				
+		}
+        $this->assign("exam",$orderlist);
         $this->assign("title","考试安排");
 		$this->display();
+	}
+	public function insertSort($datej,$datei){
+		$countj=(int)substr($datej["examdate"],3,1)*10000+(int)substr($datej["examdate"],5,2)*100+(int)substr($datej["examdate"],8,2);
+		$counti=(int)substr($datei["examdate"],3,1)*10000+(int)substr($datei["examdate"],5,2)*100+(int)substr($datei["examdate"],8,2);
+		if($countj>$counti)
+			return true;
+		if($countj<$counti)
+			return false;
+
+		$timej=(int)substr($datej["examtime"],0,2)*100+(int)substr($datej["examtime"],3,2);
+		$timei=(int)substr($datei["examtime"],0,2)*100+(int)substr($datei["examtime"],3,2);
+		if($timej>$timei)
+			return true;
+		else return false;
+
 	}
 }

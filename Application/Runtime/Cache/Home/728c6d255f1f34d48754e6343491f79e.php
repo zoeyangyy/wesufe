@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,maximum-scale=1,initial-scale=1,user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
     <title><?php echo ($title); ?></title>
     <link rel="stylesheet" type="text/css" href="/Public/css/vendor.css" />
     <link rel="stylesheet" type="text/css" href="/Public/css/main.css" />
@@ -14,7 +15,9 @@
     
     <div class="library">
         <div class="toppanel">
-            <i class="iconfont">&#xe602;</i>
+            <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-daxue"></use>
+        </svg>
             <p>上海财经大学图书馆</p>
         </div>
         <div class="weui-search-bar" id="searchBar">
@@ -41,6 +44,7 @@
     <script type="text/javascript" src="/Public/js/vendor.js"></script>
     <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>
     
+    <script src="//at.alicdn.com/t/font_8lwn5qxd2jn0cnmi.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         var range = 50; //距下边界长度/单位px  
@@ -90,7 +94,7 @@ function getbook(num) {
                         '<p class="number">' + e.booknumber + '</p>' +
                         '<p class="type"></p>' +
                         '</div>' +
-                        '<div class="box-icon"><i class="iconfont">&#xe669;</i></div>' +
+                        '<div class="box-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrowright"></use></svg></div>' +
                         '</a>')
                 });
                 var html = arr.join('');

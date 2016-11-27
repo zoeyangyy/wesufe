@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,maximum-scale=1,initial-scale=1,user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
     <title><?php echo ($title); ?></title>
     <link rel="stylesheet" type="text/css" href="/Public/css/vendor.css" />
     <link rel="stylesheet" type="text/css" href="/Public/css/main.css" />
@@ -35,7 +36,7 @@
                         </filter>
                     </defs>
                     <g id="gooey-group">
-                        <path id="curve" d="M0 90 Q 161 90 322 90" fill="white"></path>
+                        <path id="curve" d="M0 90 Q 161 90 322 90" fill="#CB8589"></path>
                     </g>
                     <g id="circle_group">
                         <circle id="circle" cx="160" cy="190" r="20" fill="rgba(255,255,255,0)"></circle>
@@ -57,6 +58,11 @@
         <svg class="iconpost" aria-hidden="true">
             <use xlink:href="#icon-aixin"></use>
         </svg>
+        <div class="bar2"></div>
+        <svg class="iconbacktop" aria-hidden="true">
+            <use xlink:href="#icon-back2top"></use>
+        </svg>
+        <a href="#" onclick="gotoTop();return false;" class="totop"></a>
     </div>
     <div class="mask"></div>
     <form class="bomb-box" action="/home/lovewall/post" method="post">
@@ -105,7 +111,7 @@
     <script type="text/javascript" src="/Public/js/vendor.js"></script>
     <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>
     
-    <script type="text/javascript" src="//at.alicdn.com/t/font_nhvh6mu77u0ltyb9.js"></script>
+    <script type="text/javascript" src="//at.alicdn.com/t/font_fxyfioupbtaf9a4i.js"></script>
     <script src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
 
     <script type="text/javascript">
@@ -417,7 +423,7 @@
                     easing: 'easeOutCubic',
                     progress: function(e, c, r, s, t) {
                         if (t > 90) {
-                            $('#curve').attr('fill', '#8B90B1');
+                            $('#curve').attr('fill', '#CB8589');
                         } else {
                             $('#curve').attr('fill', 'white');
                         }
@@ -451,7 +457,7 @@
                     easing: 'easeOutCubic',
                     progress: function(e, c, r, s, t) {
                         if (t > 90) {
-                            $('#curve').attr('fill', '#8B90B1');
+                            $('#curve').attr('fill', '#CB8589');
                         } else {
                             $('#curve').attr('fill', 'white');
                         }
@@ -497,7 +503,7 @@
                 progress: function(e, c, r, s, t) {
                     console.log("b"+t);
                     if (t > 90) {
-                        $('#curve').attr('fill', '#8B90B1');
+                        $('#curve').attr('fill', '#CB8589');
                     } else {
                         $('#curve').attr('fill', 'white');
                     }
@@ -589,7 +595,7 @@
             var d = "M0 90 Q 161 " + FRICTION_HEIGHT + " 322 90"
             $(CURVE).attr({
                 d: d,
-                fill: '#8B90B1'
+                fill: '#CB8589'
             });
         }
 
@@ -598,6 +604,42 @@
             var d = "M-10 90 Q 161 " + FRICTION_HEIGHT + " 332 90"
             $(CURVE).attr('d', d);
         }
+
+        function gotoTop(acceleration,stime) {
+       acceleration = acceleration || 0.1;
+       stime = stime || 10;
+       var x1 = 0;
+       var y1 = 0;
+       var x2 = 0;
+       var y2 = 0;
+       var x3 = 0;
+       var y3 = 0; 
+       if (document.documentElement) {
+           x1 = document.documentElement.scrollLeft || 0;
+           y1 = document.documentElement.scrollTop || 0;
+       }
+       if (document.body) {
+           x2 = document.body.scrollLeft || 0;
+           y2 = document.body.scrollTop || 0;
+       }
+       var x3 = window.scrollX || 0;
+       var y3 = window.scrollY || 0;
+     
+       // 滚动条到页面顶部的水平距离
+       var x = Math.max(x1, Math.max(x2, x3));
+       // 滚动条到页面顶部的垂直距离
+       var y = Math.max(y1, Math.max(y2, y3));
+     
+       // 滚动距离 = 目前距离 / 速度, 因为距离原来越小, 速度是大于 1 的数, 所以滚动距离会越来越小
+       var speeding = 1 + acceleration;
+       window.scrollTo(Math.floor(x / speeding), Math.floor(y / speeding));
+     
+       // 如果距离不为零, 继续调用函数
+       if(x > 0 || y > 0) {
+           var run = "gotoTop(" + acceleration + ", " + stime + ")";
+           window.setTimeout(run, stime);
+       }
+    }
     });
                 
     </script>

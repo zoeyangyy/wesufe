@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,maximum-scale=1,initial-scale=1,user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
     <title><?php echo ($title); ?></title>
     <link rel="stylesheet" type="text/css" href="/Public/css/vendor.css" />
     <link rel="stylesheet" type="text/css" href="/Public/css/main.css" />
@@ -20,12 +21,12 @@
     </div>
     <div class="topimage">
         <!-- <i class="iconfont">&#xe66d;</i> -->
-          <img src="https://d13yacurqjgara.cloudfront.net/users/218750/screenshots/2136737/linn.gif" alt="Linn">
+          <img src="/Public/img/linn.gif" alt="Linn">
     </div> 
     <div class="search-bar" id="searchBar">
         <form class="search-bar__form" action="/home/learn/library" method="post">
             <div class="search-bar__box">
-                <i class="icon-search">&#xe67c;</i>
+                <!-- <i class="icon-search">&#xe67c;</i> -->
                 <input type="search" class="search-bar__input" placeholder="输入图书名、作者名" name="book">
             </div>
             <div class="search-button">

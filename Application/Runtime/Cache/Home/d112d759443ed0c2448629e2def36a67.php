@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,maximum-scale=1,initial-scale=1,user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
     <title><?php echo ($title); ?></title>
     <link rel="stylesheet" type="text/css" href="/Public/css/vendor.css" />
     <link rel="stylesheet" type="text/css" href="/Public/css/main.css" />

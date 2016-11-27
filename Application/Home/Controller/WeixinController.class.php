@@ -19,9 +19,9 @@ class WeixinController extends Controller {
 							'key'=>'MENU_KEY_course',
 						),
 						1 => array(
-							'type' => 'view',
+							'type' => 'click',
 							'name' => '考试安排',
-							'url' => C('WEB_ROOT').'/home/learn/exam',
+							'key' => 'MENU_KEY_exam',
 						),
 						2 => array(
 							'type' => 'click',
@@ -82,9 +82,9 @@ class WeixinController extends Controller {
 							'key'=>'MENU_KEY_course',
 						),
 						1 => array(
-							'type' => 'view',
+							'type' => 'click',
 							'name' => '考试安排',
-							'url' => C('WEB_ROOT').'/home/learn/exam',
+							'key' => 'MENU_KEY_exam',
 						),
 						2 => array(
 							'type' => 'click',
@@ -185,19 +185,43 @@ class WeixinController extends Controller {
 					}
 				}
 				if ($event['key']=='MENU_KEY_score') {
-					$accessToken_time = $User->where(array('openid'=>$openid))->getField('accessToken_time');
-					if((time()-$accessToken_time)/86400>80)
-						$weObj->text("您的授权已过期，请点击 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>再次绑定</a>")->reply();
+					if($User->where(array('openid'=>$openid))->getField('accessToken')==null)
+						$weObj->text("您尚未绑定wesufe，请 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>立即绑定</a>")->reply();
 					else{
-					$info = array(
-						   	"0" =>array(
-						   		'Title'=>'成绩查询',
-						   		'Description'=>'summary text',
-						   		'PicUrl'=>'http://atth.jzb.com/forum/201502/12/175042imee0ks08ezcgs1z.png',
-						   		'Url'=> C('WEB_ROOT').'/home/learn/score?openid='.$openid,
-						   	),
-						);
-					$weObj->news($info)->reply();
+						$accessToken_time = $User->where(array('openid'=>$openid))->getField('accessToken_time');
+						if((time()-$accessToken_time)/86400>80)
+							$weObj->text("您的授权已过期，请点击 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>再次绑定</a>")->reply();
+						else{
+						$info = array(
+							   	"0" =>array(
+							   		'Title'=>'成绩查询',
+							   		'Description'=>'summary text',
+							   		'PicUrl'=>'http://atth.jzb.com/forum/201502/12/175042imee0ks08ezcgs1z.png',
+							   		'Url'=> C('WEB_ROOT').'/home/learn/score?openid='.$openid,
+							   	),
+							);
+						$weObj->news($info)->reply();
+						}
+					}
+				}
+				if ($event['key']=='MENU_KEY_exam') {
+					if($User->where(array('openid'=>$openid))->getField('accessToken')==null)
+						$weObj->text("您尚未绑定wesufe，请 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>立即绑定</a>")->reply();
+					else{
+						$accessToken_time = $User->where(array('openid'=>$openid))->getField('accessToken_time');
+						if((time()-$accessToken_time)/86400>80)
+							$weObj->text("您的授权已过期，请点击 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>再次绑定</a>")->reply();
+						else{
+						$info = array(
+							   	"0" =>array(
+							   		'Title'=>'考试安排',
+							   		'Description'=>'summary text',
+							   		'PicUrl'=>'http://img4.duitang.com/uploads/item/201602/14/20160214113222_M3Lfr.jpeg',
+							   		'Url'=> C('WEB_ROOT').'/home/learn/exam?openid='.$openid,
+							   	),
+							);
+						$weObj->news($info)->reply();
+						}
 					}
 				}
 				break;
