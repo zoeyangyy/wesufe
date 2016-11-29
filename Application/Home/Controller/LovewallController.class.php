@@ -60,7 +60,7 @@ class LovewallController extends Controller {
 			$this->ajaxReturn($list);
 		}
 		elseif($type=="like"){
-			$list = $lovewall->relation(true)->order('like_number desc,postid desc')->limit($number,5)->select();
+			$list = $lovewall->relation(true)->order('like_number desc,comment_number desc,postid desc')->limit($number,5)->select();
 			$this->ajaxReturn($list);
 		}
 	}

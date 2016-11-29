@@ -8,7 +8,7 @@ return array(
         'DB_HOST' => 'localhost',
         'DB_NAME' => 'wesufe',
         'DB_USER' => 'root',
-        'DB_PWD' => 'password',
+        'DB_PWD' => 'AnQuan2056',
         'DB_PORT' => 3306,
         'DB_PREFIX' => 'think_',
         'DB_CHARSET' => 'utf8',

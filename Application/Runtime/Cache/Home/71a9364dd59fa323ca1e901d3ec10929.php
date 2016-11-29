@@ -17,6 +17,7 @@
         <div class="toppanel">
             <select name="sources" id="sources" class="custom-select sources" placeholder="2015-2016学年 第2学期">
                 <?php if(is_array($summary)): $i = 0; $__LIST__ = $summary;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$summary1): $mod = ($i % 2 );++$i;?><option value='<?php echo ($summary1[year]); ?>-<?php echo ($summary1[term]); ?>' class="semester"></option><?php endforeach; endif; else: echo "" ;endif; ?>
+                    <option value='sumup' class="sumup">总计</option>
             </select>
             <select name="sort" id="sort" class="custom-select sources" placeholder="按成绩排序">
                 <option value="credit" class="sorttype">按学分排序</option>
@@ -34,6 +35,7 @@
                 </div><?php endforeach; endif; else: echo "" ;endif; ?>
             
         </div>
+        <button class="buttonline" data-value="0">展示绩点、学分走势图</button>
         <div class="panel">
             <div class="panel-bd-box-top">
                         <h4 class="subject">课程名</h4>
@@ -54,16 +56,16 @@
             </div>
             
         </div>
-        <div class="panel-line">
+        <div class="panel-line" style="display:none;">
                 绩点走势
             </div>
-        <div class="wrapper">
+        <div class="wrapper" id="wrapper_score" style="display:none;">
           <canvas id="canvas" width="350" height="200" class="chart"></canvas>
         </div>
-        <div class="panel-line">
+        <div class="panel-line" style="display:none;">
                 总学分走势
             </div>
-        <div class="wrapper">
+        <div class="wrapper" style="display:none;">
           <canvas id="canvas2" width="350" height="200" class="chart"></canvas>
         </div>
     </div>
@@ -97,8 +99,14 @@
                         data: datagpa,
                     }
                 ]
-            };
-            new Chart(document.getElementById('canvas').getContext('2d')).Line(myData);
+            };    
+    var configs ={
+        scaleOverride : true,
+        scaleSteps : 6, //y轴刻度的个数
+        scaleStepWidth : 0.5, //y轴每个刻度的宽度
+        scaleStartValue : 1,  //y轴的起始值
+    };
+            new Chart(document.getElementById('canvas').getContext('2d')).Line(myData,configs);
 
     var datacredit = [];
     var sum=0;
@@ -120,7 +128,13 @@
                     }
                 ]
             };
-            new Chart(document.getElementById('canvas2').getContext('2d')).Line(myData);
+    var configs2 ={
+        scaleOverride : true,
+        scaleSteps : 7, //y轴刻度的个数
+        scaleStepWidth : 20, //y轴每个刻度的宽度
+        scaleStartValue : 0,  //y轴的起始值
+    };
+            new Chart(document.getElementById('canvas2').getContext('2d')).Line(myData,configs2);
     </script>
     <script type="text/javascript">
     $(document).ready(function() {
@@ -130,6 +144,23 @@
             if($(this).find('.box-seme').text()!="2015-2016-2")
                 $(this).hide();
           });        
+        $('.buttonline').on("click",function(){
+          if($(this).data("value")=="0"){
+            $('.panel-line').show();
+            $('.wrapper').show();
+            $('.panel').hide();
+            $(this).data("value","1");
+            $(this).text("收起绩点、学分走势图");
+          }
+          else{
+            $('.panel-line').hide();
+            $('.wrapper').hide();
+            $('.panel').show();
+            $(this).data("value","0");
+            $(this).text("展示绩点、学分走势图");
+          }
+
+        });
         $("#sources").each(function() {
           var classes = $(this).attr("class"),
               id      = $(this).attr("id"),
@@ -147,10 +178,11 @@
               });
           template += '</div></div>';
 
-          $(this).wrap('<div class="custom-select-wrapper"></div>');
+          $(this).wrap('<div class="custom-select-wrapper" width="205px"></div>');
           $(this).hide();
           $(this).after(template);
         });
+        $('.sumup').html("总计");
         $("#sort").each(function() {
           var classes = $(this).attr("class"),
               id      = $(this).attr("id"),
@@ -185,12 +217,22 @@
           $(this).addClass("selection");
           $(this).parents(".custom-select").removeClass("opened");
           $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
-
+              $('.panel-bd-box').each(function(){
+                $(this).show();
+                if($(this).find('.box-seme').text()!=$('.selection').attr("data-value"))
+                    $(this).hide();
+              });
+        });
+        $(".sumup").on("click",function(){
+          $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
+          $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
+          $(this).addClass("selection");
+          $(this).parents(".custom-select").removeClass("opened");
+          $(this).parents(".custom-select").css("width","205px");
+          $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
           $('.panel-bd-box').each(function(){
-            $(this).show();
-            if($(this).find('.box-seme').text()!=$('.selection').attr("data-value"))
-                $(this).hide();
-          });
+                $(this).show();
+              });
         });
         $(".sorttype").on("click", function() {
           $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
@@ -198,6 +240,7 @@
           $(this).addClass("selection");
           $(this).parents(".custom-select").removeClass("opened");
           $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
+            
           Insertsort($(this).attr("data-value"));
 
         });
