@@ -92,6 +92,7 @@ class LearnController extends Controller {
 		$User = M('User');
 		$openid=$_GET['openid'];
 		$condition['openid'] = 'ov7LNwZrsw_jpkkwhrSq_j2ognxo'; //要替换成openid！！！！
+		// 'ov7LNwZrsw_jpkkwhrSq_j2ognxo'
 		// 'ov7LNwfazjMQ60UKDKr25URwJpzY'
 		$stuNo=$User->where($condition)->getField('stuNo');
 		$accessToken=$User->where($condition)->getField('accessToken');
@@ -114,6 +115,8 @@ class LearnController extends Controller {
 		$User = M('User');
 		$openid=$_GET['openid'];
 		$condition['openid'] = 'ov7LNwfazjMQ60UKDKr25URwJpzY'; //要替换成openid！！！！
+		// 
+
 		
 		$stuNo=$User->where($condition)->getField('stuNo');
 		$accessToken=$User->where($condition)->getField('accessToken');

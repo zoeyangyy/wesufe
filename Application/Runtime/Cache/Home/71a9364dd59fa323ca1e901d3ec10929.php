@@ -19,10 +19,11 @@
                 <?php if(is_array($summary)): $i = 0; $__LIST__ = $summary;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$summary1): $mod = ($i % 2 );++$i;?><option value='<?php echo ($summary1[year]); ?>-<?php echo ($summary1[term]); ?>' class="semester"></option><?php endforeach; endif; else: echo "" ;endif; ?>
                     <option value='sumup' class="sumup">总计</option>
             </select>
-            <select name="sort" id="sort" class="custom-select sources" placeholder="按成绩排序">
-                <option value="credit" class="sorttype">按学分排序</option>
-                <option value="score" class="sorttype">按成绩排序</option>
-            </select>
+            <div class="toppanel-icon">
+                <svg class="icongraph" aria-hidden="true">
+                    <use xlink:href="#icon-tubiao"></use>
+                </svg>
+            </div>
         </div>
         <div class="gpasummary" style="display:none;">
             <?php if(is_array($summary)): $i = 0; $__LIST__ = $summary;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$summary2): $mod = ($i % 2 );++$i;?><div class="summaryitem">
@@ -35,15 +36,24 @@
                 </div><?php endforeach; endif; else: echo "" ;endif; ?>
             
         </div>
-        <button class="buttonline" data-value="0">展示绩点、学分走势图</button>
         <div class="panel">
             <div class="panel-bd-box-top">
-                        <h4 class="subject">课程名</h4>
-                        <p class="type">类型</p>
-                        <p class="credit">学分</p>
-                        <p class="score">成绩</p>
-                        <p class="gpa">绩点</p>
-                </div>
+              <h4 class="subject">课程名</h4>
+              <p class="type">类型</p>
+              <div class="credit">
+                  <p>学分</p>
+                  <svg class="iconsort" aria-hidden="true" id="iconsort-credit">
+                      <use xlink:href="#icon-paixu"></use>
+                  </svg>
+              </div>
+              <div class="score">
+                  <p>成绩</p>
+                  <svg class="iconsort iconsort-on" aria-hidden="true" id="iconsort-score">
+                      <use xlink:href="#icon-paixu"></use>
+                  </svg>
+              </div>
+              <p class="gpa">绩点</p>
+            </div>
             <div class="panel-bd">
                 <?php if(is_array($detail)): $i = 0; $__LIST__ = $detail;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="panel-bd-box">
                         <div class="box-seme" style="display:none;"><?php echo ($vo[semester]); ?></div>
@@ -74,6 +84,7 @@
     <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>
     
 <script src="//cdn.bootcss.com/Chart.js/0.2.0/Chart.min.js"></script>
+<script src="//at.alicdn.com/t/font_c36putqftw486w29.js"></script>
 
     <script>
     var summary = $('.gpasummary');
@@ -82,11 +93,17 @@
     var a = ['大一上','大一下','大二上','大二下','大三上','大三下','大四上','大四下'];
 
     var datagpa = new Array([length]);
+    var min = 4;
+    var max = 0;
     for(var i=0;i<length;i++)
     {
         var gpa = $(".summaryitem:eq(" + i + ")").find('.gpa').text();
+        if(gpa<min) min=gpa;
+        if(gpa>max) max=gpa;
         datagpa[i]=String(gpa);
     }
+    min=Math.floor(min);
+    max=Math.ceil(max);
 
     var myData = {
                 labels: a.slice(0,length),
@@ -102,9 +119,9 @@
             };    
     var configs ={
         scaleOverride : true,
-        scaleSteps : 6, //y轴刻度的个数
-        scaleStepWidth : 0.5, //y轴每个刻度的宽度
-        scaleStartValue : 1,  //y轴的起始值
+        scaleSteps : (max-min)/0.25, //y轴刻度的个数
+        scaleStepWidth : 0.25, //y轴每个刻度的宽度
+        scaleStartValue : min,  //y轴的起始值
     };
             new Chart(document.getElementById('canvas').getContext('2d')).Line(myData,configs);
 
@@ -144,20 +161,20 @@
             if($(this).find('.box-seme').text()!="2015-2016-2")
                 $(this).hide();
           });        
-        $('.buttonline').on("click",function(){
+        $('.icongraph').on("click",function(){
           if($(this).data("value")=="0"){
             $('.panel-line').show();
             $('.wrapper').show();
             $('.panel').hide();
             $(this).data("value","1");
-            $(this).text("收起绩点、学分走势图");
+            $('.toppanel-icon').addClass("toppanel-icon-on");
           }
           else{
             $('.panel-line').hide();
             $('.wrapper').hide();
             $('.panel').show();
             $(this).data("value","0");
-            $(this).text("展示绩点、学分走势图");
+            $('.toppanel-icon').removeClass("toppanel-icon-on");
           }
 
         });
@@ -178,27 +195,12 @@
               });
           template += '</div></div>';
 
-          $(this).wrap('<div class="custom-select-wrapper" width="205px"></div>');
-          $(this).hide();
-          $(this).after(template);
-        });
-        $('.sumup').html("总计");
-        $("#sort").each(function() {
-          var classes = $(this).attr("class"),
-              id      = $(this).attr("id"),
-              name    = $(this).attr("name");
-          var template =  '<div class="' + classes + '">';
-              template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
-              template += '<div class="custom-options">';
-              $(this).find("option").each(function() {
-                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
-              });
-          template += '</div></div>';
-          
           $(this).wrap('<div class="custom-select-wrapper"></div>');
           $(this).hide();
           $(this).after(template);
         });
+        $('.sumup').html("总计");
+        
         $(".custom-option:first-of-type").hover(function() {
           $(this).parents(".custom-options").addClass("option-hover");
         }, function() {
@@ -228,21 +230,21 @@
           $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
           $(this).addClass("selection");
           $(this).parents(".custom-select").removeClass("opened");
-          $(this).parents(".custom-select").css("width","205px");
           $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
           $('.panel-bd-box').each(function(){
                 $(this).show();
               });
         });
-        $(".sorttype").on("click", function() {
-          $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
-          $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
-          $(this).addClass("selection");
-          $(this).parents(".custom-select").removeClass("opened");
-          $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
-            
-          Insertsort($(this).attr("data-value"));
+        $("#iconsort-credit").on("click", function() {
+          $(this).addClass("iconsort-on");
+          $("#iconsort-score").removeClass("iconsort-on");
+          Insertsort("credit");
 
+        });
+        $("#iconsort-score").on("click",function(){
+          $(this).addClass("iconsort-on");
+          $("#iconsort-credit").removeClass("iconsort-on");
+          Insertsort("score");
         });
 
         function Insertsort($type){

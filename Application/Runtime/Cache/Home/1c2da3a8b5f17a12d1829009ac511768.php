@@ -30,26 +30,15 @@
             </div>
         </div>
         <div class="mainview">
-            <?php if(is_array($result)): $i = 0; $__LIST__ = $result;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="mainview-box">
-                    <div class="mainview-box-icon">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="<?php echo ($vo[image]); ?>"></use>
-                        </svg>
-                    </div>
-                    <div class="mainview-box-dialog">
-                        <div class="text"><?php echo ($vo[text]); ?></div>
-                        <div class="time"><?php echo ($vo[sendtime]); ?></div>
-                        <div class="eachopenid" style="display:none;"><?php echo ($vo[openid]); ?></div>
-                    </div>
-                </div><?php endforeach; endif; else: echo "" ;endif; ?>
+
         </div>
-        <form class="bottompanel" action="/home/lovewall/comment" method="post">
+        <form class="bottompanel">
             <div class="bottompanel-input">
             	<input name="openid" type="hidden" id="openid" value="<?php echo ($openid); ?>">
-            	<input name="postid" style="display:none;" value="<?php echo ($postid); ?>">
-                <input type="text" name="comment" placeholder="发表评论">
+            	<input name="postid" style="display:none;" id="postid" value="<?php echo ($postid); ?>">
+                <input type="text" id="commentid" name="comment" placeholder="发表评论">
             </div>
-            <button type="submit">发送</button>
+            <input type="button" class="inputbutton" id="submit" value="发送">
         </form>
     </div>
 
@@ -59,11 +48,93 @@
     <script type="text/javascript" src="//at.alicdn.com/t/font_nhvh6mu77u0ltyb9.js"></script>
     <script type="text/javascript">
     	$(document).ready(function(){
-            console.log($('#openid').attr("value"));
-    		$('.eachopenid').each(function(){
-    			if($(this).text()==$('#openid').attr("value"))
-    				$(this).parent().parent().addClass("mainview-box-reverse");
-    		});
+
+            getcomment();
+
+            var postid=$('#postid').attr("value");
+            
+            $('#submit').on("click",function(){
+               
+                var comment=$('#commentid').val();
+                if(comment=="") alert("请填写评论");
+                else{
+                $('.mainview').html("");
+                $('#commentid').val("");
+                $.ajax({
+                    url: '/home/lovewall/ajaxComment',
+                    data: {
+                        postid:postid,
+                        comment:comment
+                    },
+                    success: function(data) {
+                        var arr = [];
+                        $.each(data, function(i, e) {
+                            arr.push(
+                                '<div class="mainview-box">'+
+                                    '<div class="mainview-box-icon">'+
+                                        '<svg class="icon" aria-hidden="true">'+
+                                            '<use xlink:href='+e.image+'></use>'+
+                                        '</svg>'+
+                                    '</div>'+
+                                    '<div class="mainview-box-dialog">'+
+                                        '<div class="text">'+e.text+'</div>'+
+                                        '<div class="time">'+e.sendtime+'</div>'+
+                                        '<div class="eachopenid" style="display:none;">'+e.openid+'</div>'+
+                                    '</div>'+
+                                '</div>'
+                              )
+                        });
+                        var html = arr.join('');  
+                        $('.mainview').append(html);                    
+                    },
+                    complete: function(){
+                        
+                        $('.eachopenid').each(function(){
+                            if($(this).text()==$('#openid').attr("value"))
+                                $(this).parent().parent().addClass("mainview-box-reverse");
+                        });
+                    }
+                });
+                }
+                 
+            }); 
+            function getcomment(){
+                var postid=$('#postid').attr("value");
+                $.ajax({
+                    url: '/home/lovewall/ajaxGetcomment',
+                    data: {
+                        postid:postid,
+                    },
+                    success: function(data) {
+                        var arr = [];
+                        $.each(data, function(i, e) {
+                            arr.push(
+                                '<div class="mainview-box">'+
+                                    '<div class="mainview-box-icon">'+
+                                        '<svg class="icon" aria-hidden="true">'+
+                                            '<use xlink:href='+e.image+'></use>'+
+                                        '</svg>'+
+                                    '</div>'+
+                                    '<div class="mainview-box-dialog">'+
+                                        '<div class="text">'+e.text+'</div>'+
+                                        '<div class="time">'+e.sendtime+'</div>'+
+                                        '<div class="eachopenid" style="display:none;">'+e.openid+'</div>'+
+                                    '</div>'+
+                                '</div>'
+                              )
+                        });
+                        var html = arr.join('');
+                        $('.mainview').append(html);                       
+                    },
+                    complete: function(){
+                        $('.eachopenid').each(function(){
+                            if($(this).text()==$('#openid').attr("value"))
+                                $(this).parent().parent().addClass("mainview-box-reverse");
+                        });
+                    }
+                });
+
+            }
     	});
     </script>
  
