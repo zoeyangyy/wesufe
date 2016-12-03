@@ -21,7 +21,7 @@
     </div>
     <div class="topimage">
         <!-- <i class="iconfont">&#xe66d;</i> -->
-          <img src="/Public/img/linn.gif" alt="Linn">
+          <img src="/Public/img/giphy.gif" alt="Linn" style="width: 60%">
     </div> 
     <div class="search-bar" id="searchBar">
         <form class="search-bar__form" action="/home/learn/library" method="post">
@@ -37,7 +37,6 @@
 </div>
 
     <script type="text/javascript" src="/Public/js/vendor.js"></script>
-    <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>
     
     <script type="text/javascript">
     $(document).ready(function() {

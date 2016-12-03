@@ -42,7 +42,6 @@
     </div>
 
     <script type="text/javascript" src="/Public/js/vendor.js"></script>
-    <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>
     
     <script src="//at.alicdn.com/t/font_8lwn5qxd2jn0cnmi.js"></script>
     <script type="text/javascript">

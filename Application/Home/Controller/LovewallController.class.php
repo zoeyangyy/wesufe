@@ -5,10 +5,10 @@ use Think\Controller;
 class LovewallController extends Controller {
 	public function lovewallPanel()
 	{	
-		session("openid",$_GET['openid']);
-		$this->assign('openid',$_GET['openid']);
-		$this->assign('title','表白墙');
-		$this->display();
+			session("openid",$_GET['openid']);
+			$this->assign('openid',$_GET['openid']);
+			$this->assign('title','表白墙');
+			$this->display();
 	}
 
 	public function post(){
@@ -50,8 +50,9 @@ class LovewallController extends Controller {
 		}
 	}
 	public function ajaxLike(){
+
 		$lovewall=M('Lovewall');
-		$postid=session('openid');
+		$postid=$_POST['postid'];
 		$condition['postid'] = $postid;
 		$type=$_POST['type'];
 		$item=$lovewall->where($condition)->find();

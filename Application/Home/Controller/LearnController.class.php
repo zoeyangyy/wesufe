@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 
+
 class LearnController extends Controller {
 
 	public function course() {
@@ -91,7 +92,7 @@ class LearnController extends Controller {
 	public function score() {
 		$User = M('User');
 		$openid=$_GET['openid'];
-		$condition['openid'] = 'ov7LNwZrsw_jpkkwhrSq_j2ognxo'; //要替换成openid！！！！
+		$condition['openid'] = 'ov7LNwfazjMQ60UKDKr25URwJpzY'; //要替换成openid！！！！
 		// 'ov7LNwZrsw_jpkkwhrSq_j2ognxo'
 		// 'ov7LNwfazjMQ60UKDKr25URwJpzY'
 		$stuNo=$User->where($condition)->getField('stuNo');
@@ -103,11 +104,16 @@ class LearnController extends Controller {
 		$GPAdetail = json_decode($jsonGPAdetail,true);
 		// dump($GPA);
 		// dump($GPAdetail["gpa"]);
-		
-		$this->assign('summary',$GPA);
-		$this->assign('detail',$GPAdetail["gpa"]);
-        $this->assign('title',"成绩查询");
-		$this->display();
+		if($GPA==null){
+			header("Content-Type: text/html; charset=utf-8");
+			dump("请检查你是否完成评教,地址：上财门户-评教应用");
+		}
+		else{
+			$this->assign('summary',$GPA);
+			$this->assign('detail',$GPAdetail["gpa"]);
+	        $this->assign('title',"成绩查询");
+			$this->display();
+		}
 
 	}
 

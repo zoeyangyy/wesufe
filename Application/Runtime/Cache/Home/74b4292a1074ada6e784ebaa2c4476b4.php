@@ -82,7 +82,6 @@
     </div>
 
     <script type="text/javascript" src="/Public/js/vendor.js"></script>
-    <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>
     
     <script type="text/javascript" src="//at.alicdn.com/t/font_fxyfioupbtaf9a4i.js"></script>
     <script src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
@@ -101,18 +100,23 @@
         var num = 0;
         var type = "time";        
         var sessionstorage = window.sessionStorage;
-        sessionstorage.setItem("num",num);
+        
 
             if(sessionstorage.getItem("height")){
+                    type=sessionstorage.getItem("type");
+                    if(type=="like") {
+                        $('#sortLike').addClass("toppanel-box-on");
+                        $('#sortTime').removeClass("toppanel-box-on");
+                    }
                     getpost();            
             }else{
                 sessionstorage.setItem("height",0);
             }
 
-
+        sessionstorage.setItem("type",type);
         $(window).scroll(function() {
             sessionstorage.setItem("height",$(window).scrollTop());
-            sessionstorage.setItem("num",num);
+
         });
 
         
@@ -128,6 +132,8 @@
             $('.mainview').html("");
             num = 0;            
             type = "time";
+            sessionstorage.setItem("type",type);
+            sessionstorage.setItem("height",0);
             num = getpost();
 
         });
@@ -137,6 +143,8 @@
             $('.mainview').html("");
             num = 0;            
             type = "like";
+            sessionstorage.setItem("type",type);
+            sessionstorage.setItem("height",0);
             num = getpost();
 
         });
@@ -161,12 +169,12 @@
                 $(event.target).find("use").attr("xlink:href", "#icon-dianzan");
                 var postid = $(event.target).find('.hidden-postid').text();
                 if (window.localStorage) {
-                    var storage = window.localStorage;
+                    var localstorage = window.localStorage;
 
-                    var data = JSON.parse(storage.getItem("liked-posts")) || [];
+                    var data = JSON.parse(localstorage.getItem("liked-posts")) || [];
                     data.push(postid);
                     var stringdata = JSON.stringify(data);
-                    storage.setItem("liked-posts", stringdata);
+                    localstorage.setItem("liked-posts", stringdata);
 
                 }
                 $.post("/home/lovewall/ajaxLike", {
@@ -179,16 +187,16 @@
                 $(event.target).find("use").attr("xlink:href", "#icon-like");
                 var postid = $(event.target).find('.hidden-postid').text();
                 if (window.localStorage) {
-                    var storage = window.localStorage;
+                    var localstorage = window.localStorage;
 
-                    var data = JSON.parse(storage.getItem("liked-posts")) || [];
+                    var data = JSON.parse(localstorage.getItem("liked-posts")) || [];
                     for (var i = 0; i < data.length; i++) {
                         if (data[i] == postid)
                             data.splice(i, 1);
                     }
 
                     var stringdata = JSON.stringify(data);
-                    storage.setItem("liked-posts", stringdata);
+                    localstorage.setItem("liked-posts", stringdata);
                 }
                 $.post("/home/lovewall/ajaxLike", {
                     postid: postid,
@@ -350,8 +358,8 @@
                 complete: function() {
                     $('.dialog-bottompanel-like').each(function() {
                         console.log("jiazaidianzan");
-                        var storage = window.localStorage;
-                        var data = JSON.parse(storage.getItem("liked-posts")) || [];
+                        var localstorage = window.localStorage;
+                        var data = JSON.parse(localstorage.getItem("liked-posts")) || [];
                         for (var i = 0; i < data.length; i++) {
                             if (data[i] == $(this).find('.hidden-postid').text())
                                 $(this).find("use").attr("xlink:href", "#icon-dianzan");
@@ -423,8 +431,8 @@
                 complete: function() {
                     $('.dialog-bottompanel-like').each(function() {
                         console.log("jiazaidianzan");
-                        var storage = window.localStorage;
-                        var data = JSON.parse(storage.getItem("liked-posts")) || [];
+                        var localstorage = window.localStorage;
+                        var data = JSON.parse(localstorage.getItem("liked-posts")) || [];
                         for (var i = 0; i < data.length; i++) {
                             if (data[i] == $(this).find('.hidden-postid').text())
                                 $(this).find("use").attr("xlink:href", "#icon-dianzan");
@@ -503,9 +511,8 @@
                 },
                 complete: function() {                
                     $('.dialog-bottompanel-like').each(function() {
-                        console.log("lalala");
-                        var storage = window.localStorage;
-                        var data = JSON.parse(storage.getItem("liked-posts")) || [];
+                        var localstorage = window.localStorage;
+                        var data = JSON.parse(localstorage.getItem("liked-posts")) || [];
                         for (var i = 0; i < data.length; i++) {
                             if (data[i] == $(this).find('.hidden-postid').text())
                                 $(this).find("use").attr("xlink:href", "#icon-dianzan");

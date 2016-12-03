@@ -81,7 +81,6 @@
     </div>
 
     <script type="text/javascript" src="/Public/js/vendor.js"></script>
-    <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>
     
 <script src="//cdn.bootcss.com/Chart.js/0.2.0/Chart.min.js"></script>
 <script src="//at.alicdn.com/t/font_c36putqftw486w29.js"></script>
@@ -91,22 +90,33 @@
 
     var length = summary.children().length;
     var a = ['大一上','大一下','大二上','大二下','大三上','大三下','大四上','大四下'];
+    var label = new Array();
 
-    var datagpa = new Array([length]);
+    var datagpa = new Array();
     var min = 4;
     var max = 0;
+    var j=0;
     for(var i=0;i<length;i++)
     {
-        var gpa = $(".summaryitem:eq(" + i + ")").find('.gpa').text();
-        if(gpa<min) min=gpa;
-        if(gpa>max) max=gpa;
-        datagpa[i]=String(gpa);
+        var year = $(".summaryitem:eq(" + i + ")").find('.year').text();
+        var term = $(".summaryitem:eq(" + i + ")").find('.term').text();
+        if(term.length==1){
+          if(term==lastterm)
+            label[i]=a[++j];
+          else label[i]=a[j];
+          j++;
+          var gpa = $(".summaryitem:eq(" + i + ")").find('.gpa').text();
+          if(gpa<min) min=gpa;
+          if(gpa>max) max=gpa;
+          datagpa[i]=gpa;
+        }else break;
+        var lastterm=term;
     }
     min=Math.floor(min);
     max=Math.ceil(max);
 
     var myData = {
-                labels: a.slice(0,length),
+                labels: label,
                 datasets: [
                     {
                         fillColor: 'rgba(203,133,137,.5)',
@@ -129,12 +139,15 @@
     var sum=0;
     for(var i=0;i<length;i++)
     {
+      var term = $(".summaryitem:eq(" + i + ")").find('.term').text();
+        if(term.length==1){
         var credit = $(".summaryitem:eq(" + i + ")").find('.credit').text();
         sum=parseFloat(sum)+parseFloat(credit);
         datacredit[i]=sum;
+      }else break;
     }
     var myData = {
-                labels: a.slice(0,length),
+                labels: label,
                 datasets: [
                     {
                         fillColor: 'rgba(111,168,220,.5)',

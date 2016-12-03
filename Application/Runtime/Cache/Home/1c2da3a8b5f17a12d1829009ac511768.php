@@ -43,7 +43,6 @@
     </div>
 
     <script type="text/javascript" src="/Public/js/vendor.js"></script>
-    <script type="text/javascript" src="/Public/js/iscroll-probe.js"></script>
     
     <script type="text/javascript" src="//at.alicdn.com/t/font_nhvh6mu77u0ltyb9.js"></script>
     <script type="text/javascript">
