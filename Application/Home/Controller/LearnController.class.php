@@ -9,7 +9,7 @@ class LearnController extends Controller {
 
 		$User = M('User');
 		$openid=$_GET['openid'];
-		$condition['openid'] = 'ov7LNwfazjMQ60UKDKr25URwJpzY'; 
+		$condition['openid'] = $openid; 
 		//应该替换成$openid, 这里为了测试看结果，才设置了固定的openid
 
 		$stuNo=$User->where($condition)->getField('stuNo');
@@ -64,7 +64,7 @@ class LearnController extends Controller {
 	public function score() {
 		$User = M('User');
 		$openid=$_GET['openid'];
-		$condition['openid'] = 'ov7LNwfazjMQ60UKDKr25URwJpzY'; 
+		$condition['openid'] = $openid; 
 		//应该替换成$openid, 这里为了测试看结果，才设置了固定的openid
 		// 'ov7LNwZrsw_jpkkwhrSq_j2ognxo'
 		$stuNo=$User->where($condition)->getField('stuNo');
@@ -97,7 +97,7 @@ class LearnController extends Controller {
 	public function exam(){
 		$User = M('User');
 		$openid=$_GET['openid'];
-		$condition['openid'] = 'ov7LNwfazjMQ60UKDKr25URwJpzY';
+		$condition['openid'] = $openid;
 		//应该替换成$openid, 这里为了测试看结果，才设置了固定的openid
 		
 		$stuNo=$User->where($condition)->getField('stuNo');

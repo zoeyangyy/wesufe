@@ -1,0 +1,24 @@
+<extend name="Public:layout" />
+<block name="content">
+   
+
+</block>
+<block name="css">
+  <link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet" type="text/css"/>
+</block>
+<block name="script">
+
+<script src="//cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+  
+    <script type="text/javascript">
+    $(document).ready(function() {
+      toastr.options={
+        positionClass: "toast-top-center",
+        closeButton:true,
+      };
+      var $toast = toastr['info']('绑定成功');  
+
+    });
+    </script>
+</block>

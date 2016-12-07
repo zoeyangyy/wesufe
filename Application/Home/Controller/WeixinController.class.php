@@ -50,12 +50,7 @@ class WeixinController extends Controller {
 	public function index() {
 	import("Org.Wechat");
 	$User = D('User');
-	$options = array(
-    'token'=>'Wesufe', //填写你设定的key
-    'appid'=>'wxaf3b1b64467d9eff', //填写高级调用功能的app id, 请在微信开发模式后台查询
-    'appsecret'=>'64185c84d002ed51c1b925c5d9654539' //填写高级调用功能的密钥
-    );
-	$weObj = new \Wechat($options);
+	$weObj = new \Wechat(C('WEIXIN_OPTIONS'));
 	$weObj->valid();
 	$openid = $weObj->getRev()->getRevFrom();
 	$data['openid'] = $openid;
@@ -155,6 +150,7 @@ class WeixinController extends Controller {
 				break;
 			case \Wechat::EVENT_MENU_CLICK:
 				//点击菜单时要判断学校给的accessToken是否过期，大于80天需要重新获取
+				Weixincontroller::createUser($data);
 				if ($event['key']=='MENU_KEY_course') {
 					if($User->where(array('openid'=>$openid))->getField('accessToken')==null)
 						$weObj->text("您尚未绑定wesufe，请 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>立即绑定</a>")->reply();
@@ -226,4 +222,23 @@ class WeixinController extends Controller {
 		}
 	}
 
+	public function createUser($data){
+
+		$User = D('User');
+		if($User->create($data))
+		{
+			$data['subscribe']="1";
+			$data['subscribe_time']=date('Y-m-d H:i:s');
+
+			$numbers = range (1,40); 
+			shuffle ($numbers); 
+			//array_slice 取该数组中的某一段，这里的icon引用了阿里巴巴图库
+			$result = array_slice($numbers,0,1);
+			if($result[0]<10)
+				$data['image']="#icon-0".$result[0];
+			else $data['image']="#icon-".$result[0];
+			$User->add($data);
+		}
+
+	}
 }

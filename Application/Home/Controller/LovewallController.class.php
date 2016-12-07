@@ -5,7 +5,24 @@ use Think\Controller;
 class LovewallController extends Controller {
 	public function lovewallPanel()
 	{	
+
 			session("openid",$_GET['openid']);
+			$User = D('User');
+			$data['openid'] = $_GET['openid'];
+			if($User->create($data))
+			{
+				$data['subscribe']="1";
+				$data['subscribe_time']=date('Y-m-d H:i:s');
+
+				$numbers = range (1,40); 
+				shuffle ($numbers); 
+				//array_slice 取该数组中的某一段，这里的icon引用了阿里巴巴图库
+				$result = array_slice($numbers,0,1);
+				if($result[0]<10)
+					$data['image']="#icon-0".$result[0];
+				else $data['image']="#icon-".$result[0];
+				$User->add($data);
+			}
 			$this->assign('openid',$_GET['openid']);
 			$this->assign('title','表白墙');
 			$this->display();

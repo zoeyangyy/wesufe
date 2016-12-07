@@ -15,6 +15,7 @@ class AuthController extends Controller
         $data['accessToken_time']=time();
         $data['stuNo']=$_GET["openid"];  //这里的openid是学号
 
+        //从接口获取学生的姓名班级专业信息，并存入数据库
         $json = file_get_contents("http://weixin.sufe.edu.cn/api/std/info?oauth_consumer_key=4f6p8203&clientip=CLIENTIP&oauth_version=2.a&scope=all&access_token=".$_GET["access_token"]."&openid=".$_GET["openid"]);
 		$obj = json_decode($json,true);
 
@@ -23,10 +24,13 @@ class AuthController extends Controller
         $data['stuMajor'] = $obj['major'];
 
         $User->where($condition)->save($data);
+        $this->assign('title',"绑定信息");
+        $this->display();
     }
 
     public function redirect($openid)
     {
+        
     	session('openid',$openid);
     	redirect("http://weixin.sufe.edu.cn/oauthv2/authorize?client_id=4f6p8203&response_type=code&redirect_uri=http://dev.wesufe.cn/auth");
 
