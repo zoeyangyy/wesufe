@@ -143,7 +143,8 @@ class WeixinController extends Controller {
 					$User->where(array('openid'=>$openid))->save();
 				}
 				break;
-			case \Wechat::EVENT_UNSUBSCRIBE://取关时发生
+			case \Wechat::EVENT_UNSUBSCRIBE:
+				//取关时发生
 				$User->subscribe="0";
 				$User->unsubscribe_time=date('Y-m-d H:i:s');
 				$User->where(array('openid'=>$openid))->save();
