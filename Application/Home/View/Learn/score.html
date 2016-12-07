@@ -73,9 +73,13 @@
         </div>
     </div>
 </block>
+<block name="css">
+  <link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet" type="text/css"/>
+</block>
 <block name="script">
 <script src="//cdn.bootcss.com/Chart.js/0.2.0/Chart.min.js"></script>
 <script src="//at.alicdn.com/t/font_c36putqftw486w29.js"></script>
+<script src="//cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
     <script>
     var summary = $('.gpasummary');
@@ -92,8 +96,8 @@
     {
         var year = $(".summaryitem:eq(" + i + ")").find('.year').text();
         var term = $(".summaryitem:eq(" + i + ")").find('.term').text();
-        if(term.length==1){
-          if(term==lastterm)
+        if(term.length==1){ //例外一：“小学期”应该排除在外
+          if(term==lastterm) //例外二：出国交流缺少一个学期。 可能还有其他情况，暂时没想到
             label[i]=a[++j];
           else label[i]=a[j];
           j++;
@@ -160,6 +164,11 @@
     </script>
     <script type="text/javascript">
     $(document).ready(function() {
+      toastr.options={
+        positionClass: "toast-top-center",
+        closeButton:true,
+      };
+      var $toast = toastr['error']('请检查你是否完成评教,地址：上财门户-评教应用');  
         Insertsort("score");
         $('.panel-bd-box').each(function(){
             $(this).show();
@@ -192,7 +201,7 @@
               template += '<div class="custom-options">';
               $(this).find("option").each(function() { 
                 var value = $(this).attr("value"); 
-                if(String(value).length>11)
+                if(String(value).length>11)//如果是小学期就直接写小学期
                 {     var html= String(value).substr(0,9)+"学年 "+String(value).substr(10) ;     
                 }
                 else var html = String(value).substr(0,9)+"学年 第"+String(value).substr(10)+"学期";

@@ -119,7 +119,6 @@
         })
 
         //判断已完成课程和当前课程
-        // if ($('.swiper-slide-active p:eq(1)').text().substr(3) == mydate.getDate()) {
             $('.panel-bd-box').each(function() {
                 var starttime = $(this).find('.start-time').text();
                 var endtime = $(this).find('.end-time').text();
@@ -134,7 +133,6 @@
 	                    $(this).addClass("panel-bd-box-on");
             	}
             })
-        // }
     });
     </script>
  

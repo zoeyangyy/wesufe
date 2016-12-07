@@ -4,6 +4,7 @@ use Think\Controller;
 
 class WeixinController extends Controller {
 
+	//改变菜单设置时，需要先访问这个方法才可以生效
 	public function setMenu(){
 		import("Org.Wechat");
 		$weObj = new \Wechat(C('WEIXIN_OPTIONS'));
@@ -58,17 +59,6 @@ class WeixinController extends Controller {
 	$weObj->valid();
 	$openid = $weObj->getRev()->getRevFrom();
 	$data['openid'] = $openid;
-	// //获取微信用户信息
-	// $condition['openid'] = $openid;
-	// $auth_info = $weObj->getOauthAccessToken();
-	// if($auth_info){
-	// 	$openid = $auth_info["openid"];
-	// 	$access_token = $auth_info["access_token"];
-	// 	$user_info = $weObj->getOauthUserinfo($access_token, $openid);
-	// 	$data['sex']=$user_info["sex"];
-	// 	$data['nickname']=$user_info["nickname"];
-	// }
-	// $User->where($condition)->save($data);
 
 	$menu = $weObj->getMenu(); //获取菜单操作
 		$user_menu = array(
@@ -128,7 +118,7 @@ class WeixinController extends Controller {
 		case \Wechat::MSGTYPE_EVENT:
 			$event = $weObj->getRev()->getRevEvent();
 			switch ($event['event']) {
-			case \Wechat::EVENT_SUBSCRIBE:
+			case \Wechat::EVENT_SUBSCRIBE: //用户关注时发生的事件
 				$weObj->text("欢迎关注wesufe <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>立即绑定</a>")->reply();
 				if($User->create($data))
 				{
@@ -137,7 +127,7 @@ class WeixinController extends Controller {
 
 					$numbers = range (1,40); 
 					shuffle ($numbers); 
-					//array_slice 取该数组中的某一段 
+					//array_slice 取该数组中的某一段，这里的icon引用了阿里巴巴图库
 					$result = array_slice($numbers,0,1);
 					if($result[0]<10)
 						$data['image']="#icon-0".$result[0];
@@ -158,12 +148,13 @@ class WeixinController extends Controller {
 					$User->where(array('openid'=>$openid))->save();
 				}
 				break;
-			case \Wechat::EVENT_UNSUBSCRIBE:
+			case \Wechat::EVENT_UNSUBSCRIBE://取关时发生
 				$User->subscribe="0";
 				$User->unsubscribe_time=date('Y-m-d H:i:s');
 				$User->where(array('openid'=>$openid))->save();
 				break;
 			case \Wechat::EVENT_MENU_CLICK:
+				//点击菜单时要判断学校给的accessToken是否过期，大于80天需要重新获取
 				if ($event['key']=='MENU_KEY_course') {
 					if($User->where(array('openid'=>$openid))->getField('accessToken')==null)
 						$weObj->text("您尚未绑定wesufe，请 <a href='".C('WEB_ROOT').'/home/auth/redirect?openid='.$openid."'>立即绑定</a>")->reply();

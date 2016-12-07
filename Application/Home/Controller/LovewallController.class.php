@@ -11,6 +11,7 @@ class LovewallController extends Controller {
 			$this->display();
 	}
 
+	//发布一条表白信息
 	public function post(){
 
 		if(!session('openid')){
@@ -36,6 +37,7 @@ class LovewallController extends Controller {
 		}
 	}
 
+	//下拉加载时ajax返回更多
 	public function ajaxGetpost(){
 		$lovewall=D('Lovewall');
 		$number=$_GET['page']*10;
@@ -49,6 +51,8 @@ class LovewallController extends Controller {
 			$this->ajaxReturn($list);
 		}
 	}
+
+	//给某条信息点赞时存入数据库
 	public function ajaxLike(){
 
 		$lovewall=M('Lovewall');
@@ -64,6 +68,8 @@ class LovewallController extends Controller {
 			$lovewall->where($condition)->save($data);
 		}
 	}
+
+	//信息详情页面
 	public function lovewallDetail()
 	{
 		$postid=$_GET['postid'];
@@ -80,6 +86,7 @@ class LovewallController extends Controller {
 		$this->display();
 	}
 
+	//ajax获取所有评论
 	public function ajaxGetcomment(){
 		$postid=$_GET['postid'];
 		$comment=D('Comment');
@@ -88,6 +95,8 @@ class LovewallController extends Controller {
 		$this->ajaxReturn($list);
 
 	}
+
+	//ajax添加一条评论，写入评论表。同时给那条post的comment_number加一
 	public function ajaxComment(){
 		$comment=D('Comment');
 		$comment->create();
@@ -106,13 +115,11 @@ class LovewallController extends Controller {
 		$data['userid']=$userid['userid'];
 		$data['postid']=$_GET['postid'];
 		$data['text']=$_GET['comment'];
-
 		$data['sendtime']=date('Y/m/d H:i');
 
 		$comment->add($data);
 
 		$list=$comment->relation(true)->where($condition2)->order('commentid')->select();
 		$this->ajaxReturn($list);
-		// redirect('/Home/Lovewall/lovewallDetail?postid='.$_POST['postid'].'&openid='.$_POST['openid']);
 	}
 }

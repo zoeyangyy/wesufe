@@ -88,6 +88,8 @@
     <script type="text/javascript" src="/Public/js/dropload.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
+
+        //输入文本时统计字数
         $('.weui-textarea').on('keyup', function(event) {
             var len = $(this).val().length;
             if (len >= 200) {
@@ -101,7 +103,7 @@
         var type = "time";        
         var sessionstorage = window.sessionStorage;
         
-
+            //把当前页面位置存成session。从详情页面返回首页时，可以返回到正确位置。
             if(sessionstorage.getItem("height")){
                     type=sessionstorage.getItem("type");
                     if(type=="like") {
@@ -119,13 +121,12 @@
 
         });
 
-        
         var mainviewlength_before=0;
         var mainviewlength_after=0;
 
-        getpost();
+        getpost(); //第一次加载post
 
-
+        //按时间排序
         $('#sortTime').click(function() {
             $(this).addClass("toppanel-box-on");
             $('#sortLike').removeClass("toppanel-box-on");
@@ -137,6 +138,7 @@
             num = getpost();
 
         });
+        //按点赞数排序
         $('#sortLike').click(function() {
             $(this).addClass("toppanel-box-on");
             $('#sortTime').removeClass("toppanel-box-on");
@@ -146,9 +148,9 @@
             sessionstorage.setItem("type",type);
             sessionstorage.setItem("height",0);
             num = getpost();
-
         });
 
+        //提交时，检查空格是否填满
          $("#submit").click(function(check){  
             if($('#input-sender').val()=="")
                 {alert("写上你的名字或者选择匿名发送~");$("#input-sender").focus();  
@@ -162,7 +164,7 @@
             else {alert("提交成功");}
         });  
 
-
+         //给信息点赞：1.存入localstorage，使同一用户不能重复点赞。2.存入数据库
         $('.mainview').on('click', '.dialog-bottompanel-like', function(event) {
             if ($(event.target).find("use").attr("xlink:href") == "#icon-like") {
                 $(event.target).find("span").text(parseInt($(event.target).find("span").text()) + 1);
@@ -170,12 +172,10 @@
                 var postid = $(event.target).find('.hidden-postid').text();
                 if (window.localStorage) {
                     var localstorage = window.localStorage;
-
                     var data = JSON.parse(localstorage.getItem("liked-posts")) || [];
                     data.push(postid);
                     var stringdata = JSON.stringify(data);
                     localstorage.setItem("liked-posts", stringdata);
-
                 }
                 $.post("/home/lovewall/ajaxLike", {
                     postid: postid,
@@ -188,13 +188,11 @@
                 var postid = $(event.target).find('.hidden-postid').text();
                 if (window.localStorage) {
                     var localstorage = window.localStorage;
-
                     var data = JSON.parse(localstorage.getItem("liked-posts")) || [];
                     for (var i = 0; i < data.length; i++) {
                         if (data[i] == postid)
                             data.splice(i, 1);
                     }
-
                     var stringdata = JSON.stringify(data);
                     localstorage.setItem("liked-posts", stringdata);
                 }
@@ -213,7 +211,7 @@
             $('.mask').fadeToggle(500);
             $('.bomb-box').fadeToggle(500);
             $('.cancel').fadeToggle(500);
-            flag=0;
+            flag=0; //flag为0的时候，页面touchmove事件失效
 
         });
 
@@ -222,9 +220,10 @@
             $('.bomb-box').fadeToggle(500);
             $('.cancel').fadeToggle(500);
             $('body').css("overflow","");
-            flag=1;
+            flag=1; 
         });
 
+        //blur为失焦事件
         $('.weui-textarea').blur(function(){
             var srollPos = $(window).scrollTop();
             $('.mask').css("top",srollPos);
@@ -270,6 +269,7 @@
             $('#hidden').attr("value", "0");
         });
 
+        //是否匿名发送
         $('.anonymous').click(function() {
             if ($(this).hasClass("anonymous-on")) {
                 $(this).removeClass("anonymous-on");
@@ -281,7 +281,8 @@
                 $(this).siblings("input").attr("value", "匿名");
             }
         });
-            // dropload
+
+        // 引用的dropload插件
     $('.outermainview').dropload({
         scrollArea : window,
         domUp : {
@@ -457,6 +458,7 @@
         autoLoad: false
     });
 
+        //从数据库得到post，向后台调用ajax方法
         function getpost() {
             $('#dropload-down').hide();
             console.log("执行首次"+num);
